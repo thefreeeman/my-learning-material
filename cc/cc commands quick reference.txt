@@ -1,0 +1,104 @@
+strt stop a dynamic view:
+cleartool startview <viewtag>
+cleartool endview -server <viewtag>	-	Deactivates the specified view
+Info	: The –server option terminates the view's view_server process. Without –server, endview does not affect the view's availability from computers other than the current one.
+
+cleartool find command additional examples:
+-------------------------------------------
+http://www-01.ibm.com/support/docview.wss?uid=swg21124425
+http://www.samecs.com/commands/cleartool%20commands/find/find.htm
+
+
+Problem	:find all versions for an element that are not labeled with either of two label types in the VOB. 
+Query	:cleartool find . -version !"lbtype(tested) && !lbtype(release) " -print
+
+Problem	:Excluding any elements that do not have both labels, list all versions in the current VOB labeled either REL1 or REL2 "but not both":
+Query	:find -all -element '{lbtype_sub(REL1) && lbtype_sub(REL2)}' -version '{(lbtype(REL1) && ! lbtype(REL2)) || (lbtype(REL2) && !lbtype(REL1))}' -print 
+
+Problem	:List each header file (*.h) for which some version is labeled REL2 or REL3. 
+Query	:find . -name '*.h' -element 'lbtype_sub(REL2) || lbtype_sub(REL1)' -print
+
+
+Problem	:Redirecting to a file
+Query	:find . -all -print > C:\out.txt
+	 find . -all -print > C:\out.txt 2>&1	--> gets both STDOUT and STDERR information to the file in Windows
+	 find . -all -prinit >& /tmp/out.txt	 --> gets both STDOUT and STDERR information to the file on Unix
+
+Problem	:Find the latest versions of all elements in a directory and execute a cleartool rmname on them
+Query	:cleartool find . -version version(\main\LATEST) -exec 'cleartool rm %CLEARCASE_PN%'
+
+Problem	:Find an element with a particular name:
+Query	: cleartool find . -name "some name" -print
+
+problem	: Find all the latest versions of all files with a .txt extension and list those versions:
+Query	: cleartool find . name "*.txt" -version version(\main\LATEST) -print
+
+
+Problem	: Find all element versions with a given label that are not on a given branch:
+
+Query(Windows:)	:cleartool find -all -version "lbtype_sub(MYLABEL) && !brtype(mybranch)" -print
+Query(Unix:)	:cleartool find -all -version 'lbtype_sub(MYLABEL) && !brtype(mybranch)' -print
+
+
+Problem	: find checkouts on a specific branch
+Query(Windows)	: cleartool find . -version "brtype(main)" -print | find "CHECKEDOUT"
+Query(Unix)	: cleartool find . -version "brtype(main)" -print | grep CHECKEDOUT
+
+
+script to find version ofa filein clearcase:
+------------------------------------------------
+http://stackoverflow.com/questions/4447178/script-to-get-a-files-version-in-clearcase
+
+
+
+Get specific version of unloaded file with cleartool
+-----------------------------------------------------------
+
+http://stackoverflow.com/questions/7204929/get-specific-version-of-unloaded-file-with-cleartool
+
+http://stackoverflow.com/questions/176858/in-clearcase-how-can-i-view-old-version-of-a-file-in-a-static-view-from-the-co/177350#177350
+
+
+good article on version extended path names in CC:
+---------------------------------------------------
+https://publib.boulder.ibm.com/infocenter/cchelp/v7r0m1/index.jsp?topic=/com.ibm.rational.clearcase.cc_ref.doc/topics/version_selector.htm
+
+
+Interesting Information on CC:
+--------------------------------
+https://publib.boulder.ibm.com/infocenter/cchelp/v7r0m1/index.jsp?topic=/com.ibm.rational.clearcase.cc_ref.doc/topics/version_selector.htm
+
+CC command to see the list versions for an element:
+-----------------------------------------------------
+cleartool lsvtree element-path
+
+To open a version not currently in your view from a command prompt using a version-extended path
+---------------------------------------------------------------------------------------------------
+https://publib.boulder.ibm.com/infocenter/cchelp/v7r0m0/index.jsp?topic=/com.ibm.rational.clearcase.hlp.doc/cc_main/to_open_not_view.htm
+1) Start dynamic view or move to a directory loaded into a snapshot view. 
+2) cleartool lsvtree element-path 
+on unix / linux	: % cleartool lsvtree prog.cprog.c@@/main 
+		  prog.c@@/main/0 
+		  prog.c@@/main/r1_fix
+		  prog.c@@/main/r1_fix/1 
+		  prog.c@@/main/r1_fix/2 
+		  prog.c@@/main/1 
+on windows	: cleartool lsvtree prog.cprog.c@@/main 
+		  prog.c@@\main\0 
+		  prog.c@@\main\r1_fix 
+		  prog.c@@\main\r1_fix\1 
+		  prog.c@@\main\r1_fix\2 
+		  prog.c@@\main\1
+3) Comparison of the files using version extended pathnames:
+Unix	: % cleartool diff prog.c@@/main/r1_fix/1 prog.c@@/main/1
+Windows	: > diff prog.c@@\main\r1_fix\1 prog.c@@\main\1
+
+4) get the older version
+Unix	:% cleartool get -to prog.old.c prog.c@@/main/r1_fix/1
+Windows	:% cleartool get -to prog.old.c prog.c@@/main/r1_fix/1
+
+
+
+To change the versions a view selects (Windows)
+-------------------------------------------------
+https://publib.boulder.ibm.com/infocenter/cchelp/v7r0m0/index.jsp?topic=/com.ibm.rational.clearcase.hlp.doc/cc_main/to_change_select_view.htm

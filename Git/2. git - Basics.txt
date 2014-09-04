@@ -1,0 +1,166 @@
+G I T -- B A S I C S 
+- - - - - - - - - - -
+
+You can get a Git project using two main approaches:
+1. Take an existing project or directory and imports it into Git.
+2. Clone an existing Git repository from another server.
+
+
+Initializing a Repository in an Existing Directory
+-------------------------------------------------
+$cd <project-directory>
+$ git init
+
+	- Above creates a .git directory with all necessary repo files - a git repo skeleton. 
+	- Nothing in your project is tracked yet. 
+	
+
+$ git add *.c
+$ git add README
+$ git commit -m 'initial project version'
+	- The above commands start tracking the above files and does an initial commmit. 
+	- version control starts from the above steps. 
+	
+Cloning an Existing Repository
+------------------------------
+$git clone [url]
+eg: clone the Ruby git repo:
+$ git clone git://github.com/schacon/grit.git
+	- creats a dir names grit
+	- initializes a .git dir inside it
+	- pulls down all data for the repo 
+	- checks out a working copy of that version
+
+$ git clone git://github.com/schacon/grit.git mygrit
+	- does same as above. except that the local copy is created in a directory called mygrit and not grit
+
+Different protocols for cloning a git repo:
+	- git://
+	- http(s)://
+	- user@server:/path.git (uses the SSH transfer protocol)
+
+Recording changes to the repository
+-----------------------------------
+Checkout / Working Copy:
+	When an existing repo is cloned or an existing project has been added to the repository, you have a checkout or working copy of the files of your project. 
+
+Tracked files:
+		Files that were in the last snapshot; they can be unmodified, modified, or staged.
+		When you first clone a repository, all of your files will be tracked and unmodified because you just checked them out and haven’t edited anything.
+Untracked files:
+		Everything else — any files in your working directory that were not in your last snapshot and are not in your staging area. 
+
+		
+	|Untracked|				|Unmodified|			|modified|				 |Staged|
+		-------------------------------------------------------------------------
+		|						|						|						|
+		|						|						|						|
+		|						|----edit the file----->|						|
+		|----add the file------>|						|						|
+		|						|						|						|
+		|						|						|---stage the file----->|
+		|<----remove the file---|						|						|
+		|						|						|						|
+		|						|						|						|
+		|						|						|						|
+		|						|<-------------commit the file------------------|
+		|						|						|						|
+		|						|						|						|
+		-------------------------------------------------------------------------
+					The lifecycle of the status of your files.
+					
+Very Useful + Important Reading:
+http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository
+
+commands:
+$ git status
+$ git add
+$ git commit -v
+$ git commit -m "some commit message here"
+$ git commit -a -m "some commit message here"
+$ git status
+$ git diff
+$ git status --cached
+
+http://git-scm.com/book/en/Git-Basics-Viewing-the-Commit-History
+$ git log
+$ git log -p -2	---> to get the diff in the logs as well as only the last two entries. 
+$ git log -U1 --word-diff	--> to get the word diffs, useful in case of large word files
+$ git log --status			--> prints below each commit entry a list of the modified files
+other options are --pretty, --oneline, --short, --full, --fuller
+$ git log --pretty=format: %h - %an, %ar : %s
+							-- where %h is the abbreviated hash
+									 %an is the author name		(who originally applied the patch)
+									 %ar is the author date, relative
+									 %s is the subject
+									 %cn is the committer name (who last applied the patch)
+
+
+$ git log --graph		--> shows an ASCII graph
+$ git log --since=2.weeks
+$ git log --after="2014-04-29 00:00:00" --before="2014-04-29 23:59:59" \
+  --pretty=fuller
+$ gitk --> GUI for visualizing history
+
+
+$ git commit -m 'initial commit'
+$ git add forgotten_file
+$ git commit --amend
+$ git checkout -- benchmarks.rb
+$ git remote	--> To see which remote servers you have configured
+$ git remote -v	--> To see which remote servers you have configured, with the url for the shortname
+$ git remote add [shortname] [url]	--> To add a new remote Git repository as a shortname 
+$ git fetch [shortname]				--> fetches data from the remote projects using the shortname
+
+***
+	- If you clone a repository, the command automatically adds that remote repository under the name origin.
+	- So, git fetch origin fetches any new work that has been pushed to that server since you cloned (or last fetched from) it. 
+	- It’s important to note that the fetch command pulls the data to your local repository — it doesn’t automatically merge it with any of your work or modify what you’re currently working on. You have to merge it manually into your work when you’re ready.
+	
+$ git pull -->  to automatically fetch and then merge a remote branch into your current branch
+*** 
+	- by default, the git clone command automatically sets up your local master branch to track the remote master branch on the server you cloned from (assuming the remote has a master branch).
+	- Running git pull generally fetches data from the server you originally cloned from and automatically tries to merge it into the code you’re currently working on.
+
+$ git push [remote-name] [branch-name]. --> When you have your project at a point that you want to share, you have to push it upstream
+$ git push origin master		--> to push your master branch to your origin server ((again, cloning generally sets up both of those names for you automatically))
+
+$ git remote rename pb paul	-->  to rename pb to paul
+$ git remote rm paul		-->  to remove a reference for some reason
+$ git tag					--> list available tags, alphabetically
+$ git tag -l 'v1.4.2.*'		--> lists tags in particular pattern
+
+Git uses two main types of tags: 
+	 - lightweight	:A lightweight tag is very much like a branch that doesn’t change — it’s just a pointer to a specific commit. 
+	 - annotated	:Annotated tags, however, are stored as full objects in the Git database.
+					They’re checksummed; contain the tagger name, e-mail, and date; have a tagging message; and can be signed and verified with GNU Privacy Guard (GPG). It’s generally recommended that you create annotated tags so you can have all this information; but if you want a temporary tag or for some reason don’t want to keep the other information, lightweight tags are available too.
+					
+$ git tag -a v1.4 -m 'my version 1.4'	--> creates an annoted tag
+$ git show v1.4				--> shows tag data along with the commit that was tagged by
+$ git tag -s v1.5 -m 'my signed 1.5 tag'--> creates a annoted tag with a sign. Sign a tag using GPG, you need to have a private key for the same. 
+$ git tag v1.4-lw			--> creates a lightweight tag without any information
+git tag -v [tag-name]		--> to verify a tag. Public key is required for this. 
+
+Tagging commmits after you've moveed past them:
+----------------------------------------------
+$ git log --pretty=oneline		--> displays the log with the checksum
+$ git tag -a v1.2 -m 'version 1.2' <commit checksum obtained in the above step>
+
+$ git log --pretty=oneline
+15027957951b64cf874c3557a0f3547bd83b3ff6 Merge branch 'experiment'
+a6b4c97498bd301d84096da251c98a07c7723e65 beginning write support
+0d52aaab4479697da7686c15f77a3d64d9165190 one more thing
+6d52a271eda8725415634dd79daabbc4d9b6008e Merge branch 'experiment'
+0b7434d86859cc7b8c3d5e1dddfed66ff742fcbc added a commit function
+4682c3261057305bdd616e23b64b0857d832627b added a todo file
+166ae0c4d3f420721acbb115cc33848dfcc2121a started write support
+9fceb02d0ae598e95dc970b74767f19372d61af8 updated rakefile
+964f16d36dfccde844893cac5b347e7b3d44abbc commit the todo
+8a5cbc430f1a9c3d00faaeffd07798508422908a updated readme
+
+$ git tag -a v1.2 -m 'version 1.2' 9fceb02
+
+
+git push origin [tagname]		--> transferring tags to the remote servers.  This process is just like sharing remote branches.  git push command doesn’t 		transfer tags to remote servers.
+
+$ git push origin --tags		-->  transfer all of your tags to the remote server that are not already there.

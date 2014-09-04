@@ -1,0 +1,25 @@
+Buzzwords:
+-----------
+ - Continuous Inspection: 
+	Continuous Inspection is a holistic, fully-realized process designed to make internal code quality an integral part of the software development life cycle. By raising its visibility for all stakeholders throughout the life cycle, Continuous Inspection enables enterprises to embrace code quality whole-heartedly.
+
+External versus INternal Software Quality:
+------------------------------------------
+External, or functional, quality describes how well the software matches its 
+defined functional requirements – does it perform as intended? Internal quality describes key internal 
+attributes of the code, such as robustness, standards-compliance, and maintainability
+
+Why is maintaining Code Quality Important:
+------------------------------------------
+ustry statistics 
+show that on average, 80% of the lifetime cost of a software product is spent on maintenance, and that 
+maintenance costs have a high variability depending on internal quality. This means that the level of 
+maintainability a software product has today will determine the level of its cost liability tomorrow.
+
+
+Useful links:
+==============
+
+SonarCube / Sonar Runner Installation:
+----------------------------------------
+http://docs.codehaus.org/display/SONAR/Installing#Installing-InstallingClientInstallingtheAnalyzers

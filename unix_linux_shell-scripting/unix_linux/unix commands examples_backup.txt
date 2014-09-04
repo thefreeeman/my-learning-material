@@ -1,0 +1,143 @@
+---> some useful information on commands:
+	ls / 			--> lists contents of the root directory
+	ls . 			--> lists contents of the current directory
+	ls | more 		--> for listing the contents of a directory one screen at a time. 
+	ls | sort 		--> for listing the files in the sorted manner. 
+	ls | spell | sort 	--> for listing the files by first spell checking and then displaying in sorted manner;does not work on cygwin and on bash perhaps. 
+	ls | wc -l >> directoryinfo 	--> for appending the count of the items in the directory to the directoryinfo file. 
+	ls | grep patterninfo	--> lists the contents of the directory that matches the patteninfo.
+	ls patterninfo		--> lists the contents of the directory named / matching pattern name patterninfo (patterninfo is contained in the current directory)
+	ls -lR			--> displays the directory contents recursively
+	ls -lR directoryinfo	--> displays recursively the contents of the directoryinfo (note that's an R and not an r)
+	ls -a			--> displays hidden files too. hidden files are the ones that start with a . in their name
+	ls -lt			--> displays files in long listing format with files sorted by their modification time. 
+	ls -ltc			--> displayes files in long listing format with files sorted and listed by their modification time. (need to check the variation between this and lt)
+	ls -ltcr		--> -r reverses the sequence of the output based on what would be displayed without -r and with the other options used.	Here it reverses the order of -ltc.  (dont get confused with -r and -R). 
+				
+
+	more filenametoread	--> displays the contents of the file filenametoread. 
+	less filenametoread	--> same as more but with more options; yet to be explored
+
+
+
+
+
+	cd ~ 			--> takes you to the home directory (and not the root directory). ~ usually is /home/users/y/yourid/ or something like this. 
+
+passwd:
+	passwd 			--> command to change the password for the current user
+	yppasswd 		--> command tochange current user password in some unix-like environments
+	
+man:
+	man commandtoman	--> displays manual pages for the commandtoman
+	man -k commandtoman	--> displays manual pages for the commandtoman, but int the CodeListing format; quite useful command
+	apropos commandtoman	--> same as man -k command; more info can be found by "man -k apropos", quite simple,huh!
+	man 1 commandtoman or man -s 1 commandtoman	--> displays the section 1 of the manual pages forthe command commandtoman
+	man last commandtoman	--> displays the last section of the manualpages for the commandtoman
+	man passwd | col -b -x > ~/my.password.command.notes --> to make a copy of the passwd man page, sans formatting, in your home 	directory, under the name my.password.command.notes
+	The col -b -x command fixes some formatting oddities; without it, all of the underlined words might show up as _u_n_d_e_r_l_i_n_e, depending on the system.)
+	/<string-to-search>	--> finds an option or keyword in the man pages; hit 'n' to search the next occurence
+	
+
+mkdir:
+	mkdir -p ~/learning/Unix-N-Shell-scripting/Unix-Commands	-->	creates the specified directorties recursively
+
+
+	
+cp / mv  / rm / diff:
+	cp -r sourcedir destdir	--> copies 'recursively' source dir to destination dir
+	cp -i srcfile destfile	--> copies src file to dest file,but insists  that the system prompts u before you copy an existing file
+	mv -i srcfileordir destfileordir
+	rm -i -- bad-file-name	--> to remove files with bad names that start with a --
+	find ~ -name '*.backup' -ok rm {} \;	--> to find and remove files with confirmation
+	find ~ -name '*.backup' -exec compress {} \; --> to find and compress the files
+	find /home/shared -mtime -3		-->find all files under the shared directory that were modified within the last three days
+	diff / sdiff: to compare two files
+
+sudo apt-get install finger 	--> this command gets the finger package from web and installs to your ubuntu machine
+
+---> To exclude the last word of all the line like sync.php, uploads.php, backup.php
+
+File text include as below
+
+/usr/home/htdocs/drag-and-drop/htdocs.php
+/usr/home//htdocs/sms/publish/pages/sync.php
+/usr/home/htdocs/track/backup.php
+/usr/home/htdocs/smstest/smstest.php
+/usr/home/htdocs/uploads.php
+/usr/home/htdocs/017/backup.php
+
+
+
+solution:
+rev filecontenet.txt | cut -d’/’ -f2- | rev
+
+rev filecontenet.txt –> reverses the file and pipes to cut command.
+cut -d’/’ -f2- –> cuts off the first field ( cuts off last field, as it is reversed ).
+rev –> prints the output given order.
+
+sed -e ‘s/\/[^/]*.php$/\//’ filecontenet.txt
+
+
+
+
+---> To search for a string in all the files in the directory and add a $ symbol at the start of the searched line and save in the same file.
+
+Solution:
+sed -i ‘s/.*abc.*/$&/’ *
+
+-i : edit the input file.
+s/// : substitute the matched pattern with the replacement string.
+/.*abc.*/ : match the string abc
+/$&/ : Replace with $ followed by matched string.
+* : all the files in the current directory.
+
+
+or
+find . -type f -exec sed -i ‘s/.*abc.*/#&/’ {} \;
+for applying it recursively on all files
+
+
+
+vi editor commands:
+-----------------
+:%s/^ *[0-9]* *//
+------------------
+for getting a history of commands only (and not the spaces and line numbers) in a text file:
+history 20 > commandshistory
+vi commandshistory
+:%s/^ *[0-9]* *//
+this would replace everything of the pattern: <space-followed-by-digits-follwed-by-spaces> to ''
+
+
+
+command: echo ls -1Ftc | head -1
+----------------------------------
+displayes the last modified file
+ls -1: displays one output per line
+ls -1F: displays a '/' after every directory so that we know that this is a file or directory. Useful for scripts where only file names are obtained
+ls -1Ft: displays the last modified files (ending with a '/', if directory), sorted with the time
+ls -1Ftc: same as above, sorted with the last modification time. 
+head -1: displays the 1st entry of the above output
+note: ls -1Fltc wont work since -l and -1 would be actually mutually exclusivce as -l is for long listing and -1 is for displaying only first column. 
+
+cat / spell / wc:
+-----------------
+cat filename | spell | wc -l		--> this lists the word count of the mis-spelled words in the file named filename
+
+
+
+
+
+
+
+reference books from which this document has been created:
+----------------------------------------------------------
+ - Peachpit.Press.Unix.and.Linux.Visual.Quick.Start.Guide.Jul.2009.pdf
+
+
+useful links:
+ - www.distrowatch.com : site to help the various linux flavours. 
+ - www.chiark.greenend.org.uk/~sgtatham/putty/ : putty link fordownload purposes/ 
+
+

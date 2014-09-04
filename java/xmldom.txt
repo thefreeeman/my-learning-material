@@ -1,0 +1,98 @@
+Preface: The below link is quite useful:
+http://www.w3schools.com/dom/default.asp
+
+XML DOM Summary
+===============
+[source link: http://www.w3schools.com/dom/dom_summary.asp]
+The XML DOM defines a standard for accessing and manipulating XML.
+
+According to the DOM, everything in an XML document is a node.
+
+The text of an element node is stored in a text node.
+
+The XML DOM views an XML document as a tree-structure. The tree structure is called a node-tree.
+
+In a node tree, the terms parent, child, and sibling are used to describe the relationships.
+
+All modern browsers have a build-in XML parser that can be used to read and manipulate XML.
+
+With the XML DOM properties and methods, you can access every node in an XML document.
+
+Important node properties: nodeName, nodeValue, and nodeType.
+
+When using properties or methods like childNodes or getElementsByTagName(), a node list object is returned.
+
+Different browsers treat new line, or space characters, between nodes differently.
+
+To ignore empty text nodes between element nodes, you can check the node type.
+
+Nodes can be navigated using node relationships.
+
+Our XML DOM examples also represent a summary of this XML DOM tutorial.
+
+
+
+
+
+XML DOM Nodes
+==============
+[source link: http://www.w3schools.com/dom/dom_nodes.asp]
+In the DOM, everything in an XML document is a node.
+
+DOM Nodes
+According to the DOM, everything in an XML document is a node.
+
+The DOM says:
+
+The entire document is a document node
+Every XML element is an element node
+The text in the XML elements are text nodes
+Every attribute is an attribute node
+Comments are comment nodes
+
+Text is Always Stored in Text Nodes
+A common error in DOM processing is to expect an element node to contain text.
+
+However, the text of an element node is stored in a text node.
+
+In this example: <year>2005</year>, the element node <year>, holds a text node with the value "2005".
+
+"2005" is not the value of the <year> element!
+
+
+XML DOM: the Attr Object
+=======
+[source link: http://www.w3schools.com/dom/dom_attribute.asp]
+Attr Object: 
+
+The Attr object represents an attribute of an Element object. The allowable values for attributes are usually defined in a DTD.
+
+Because the Attr object is also a Node, it inherits the Node object's properties and methods. However, an attribute does not have a parent node and is not considered to be a child node of an element, and will return null for many of the Node properties.
+
+Text object
+===========
+[source link: http://www.w3schools.com/dom/dom_text.asp]
+The Text object represents the textual content of an element or attribute
+
+
+XML DOM - The CDATASection Objec
+[source link: http://www.w3schools.com/dom/dom_cdatasection.asp]
+
+The CDATASection object represents a CDATA section in a document.
+
+A CDATA section contains text that will NOT be parsed by a parser. Tags inside a CDATA section will NOT be treated as markup and entities will not be expanded. The primary purpose is for including material such as XML fragments, without needing to escape all the delimiters.
+
+The only delimiter that is recognized in a CDATA section is "]]>" - which indicates the end of the CDATA section. CDATA sections cannot be nested.
+
+
+
+XML DOM - The Comment Object
+=============================
+[source link: http://www.w3schools.com/dom/dom_comment.asp]
+
+The Comment object represents the content of comment nodes in a document.
+
+
+Other objects:
+===============
+Again there are httprequest object etc, that can cheked by visiting the above source links. this is beyond the scope of the work that I am planning to do and hence not jotted down here. 

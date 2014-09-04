@@ -1,0 +1,190 @@
+Understanding Unix Shell scripts (Accenture mylearning training - skillport)
+-----------------------------------------------------------------------------
+Unix shell is a command-line interpreter that processes each command or combination of commands on a command line when 
+you press Enter. 
+
+
+Examples:
+------------
+single command:
+===============
+$sort -r list
+
+
+composite command:
+==================
+can be created by combining multiple commands on the same command line eg.,
+$ls -l | less
+
+special characters and commands
+================================
+A semicolon (;) 
+----------------
+; allows you to place more than one command statement in the same command line. When you enter the code, the shell executes the precediung commands onlywhen it reaches the semicolon. 
+$cp list list.bak; cat list.bak
+eg., cp command follows by the cat command:
+
+cp somefile somefile.bak; cat somefile.bak
+
+
+
+
+backslash (\):
+---------------
+The backslash (\) character prevents the shellfrom treating another character as a special character through a process called 'baskslash escaping'. 
+
+This allows you to split a command statement across multiple lines. When you place the backslash at the end of a line and then press Enter you can continue the statement on the next line. The backslash prevents the shell from treating the Enter keystroke - or new line character - as a special character. 
+
+An example ofa long echo statement carried across three lines.
+
+$echoLong pieces of text may not always fit\
+> onto a single line\
+> of command and hence\
+>backslash characters can be used. 
+
+
+greater than (>) 
+-----------------
+redirects the standard output ofa command to a file ora device such as a printer instead of tothe terminal screen. 
+
+$ls -l ~ > homedirs
+
+
+less than (<)
+-------------
+sends the contents ofa file to a command as its standard input. 
+
+$sort -d < list
+
+
+Pipe Character (|)
+-----------------
+directs the output of one command to the input of another command
+
+$cat EasyNomad | grep 'South America'
+
+
+
+ampersand (&)
+--------------
+& at the end of a command statement allows you to run commands in the background. 
+for eg in the following command the find command will run a long process in the background:
+
+$find / -name EasyNomad &
+[1] 232323
+$EasyNomad
+
+
+Using special characters on the command line:
+=============================================
+$echo I am Good Engineer \& Doctor \& an all rounder at the same time bro
+
+
+Q. How does the shell processes the contents if a command line in order to execute it?
+A. When you execute the command line, the shell looks for spaces and special characters and splits the command line into segments wherever these characters occur. it then processes each segment in turn. 
+
+
+
+
+The segments into which the shell divides a command line are called tokens. To execute a command line, the shell processes the first token and then each subsequent token in turn. 
+
+
+
+
+1) split into tokens
+2) check for keyword / alias. if substructure (function, conditional statement or bracketed group of commands) is met, the substructure is processed first before moving on to the next token. 
+3) If token is alias then it is replaced with the command to which the alias is mapped. 
+4) If the token is an ordinary word such as command or filename, the shellprocesses it directly.
+
+
+
+Expansion and substitution takes place in the following sequence:
+1) Brace Expansion: braces or curly brackets ({}) are first met and the contents are expanded first eg., token b{all,ook} expands into ball book. 
+
+2) Tilde expansion: If tilde (~) is present then its replaced with the location oft he current user's home directory.  eg., ~vincep/file2 might expand into /usr/home/vincep/file2
+
+3) parameter substitution for the $ sign in the token name. The token is then replacedwith the current value of the corresponding variable. eg., $SHELL is replaced with /bin/sh or /bin/ksh. 
+
+4) Spell checks whether the token is a command enclosedinbrackets and preceded by a dollar sign($). eg., ${type username}
+
+5) arithmetic substitution
+
+
+example on a directory listing as follows
+----------------------------------------
+tapas@tapas-PC ~
+$ ls -l
+total 5
+-rw-r--r--  1 tapas None 284 May  2 23:11 homedir.txt
+-rw-r--r--  1 tapas None 158 Mar 26 02:05 hometapasfile.new.txt
+-rwxrwxrwx  1 tapas None 144 Mar 22 13:22 hometapasfile.txt
+-rw-r--r--  1 tapas None  66 May  2 23:55 hosts
+drwxr-xr-x+ 1 tapas None   0 May  2 22:54 lisrt
+-rwxr-xr-x  1 tapas None 181 Mar 19 16:50 pattern
+
+tapas@tapas-PC ~
+$ cat hosts
+server1.easynomad.com server2.easynomad.com server3.easynomad.com
+
+tapas@tapas-PC ~
+$ vi hostname
+
+tapas@tapas-PC ~
+$ cat hosts | grep $(cat ~/hostname )
+server1.easynomad.com server2.easynomad.com server3.easynomad.com
+
+tapas@tapas-PC ~
+$ cat hosts | grep -o $(cat ~/hostname )
+server3.easynomad.com
+
+tapas@tapas-PC ~
+$
+
+
+Command's execute status:
+========================
+The Shell knows that a command has executed successfully when the exit status of the command is zero. 
+
+
+
+Command grouping:
+=================
+
+================
+To make one command conditional on another, you join the commands using a double ampersand (&&). The command after the && symbilsexecutes only if the command before the && symbol produces a zero exit status - in other words if it executes successfully. 
+
+
+ls userlist && sort userlist --> the sort command woudl execute onlyif the ls commands exit status is 0
+ls userlist || touch userlist --> touch command would be executed only when the ls command completes with a non-zero exit status
+
+
+
+{} can be used to group commands. The Shell treats the command block enclosed in {} as if it were a single command. eg.,
+${sort | grep 'mexico'}
+${sort | grep 'mexico'} < flights > mexico_flights
+
+
+You can group the commands using round brackets - often called parantheses - instead of braces. This causes the shell to spawn a subshell and execute the command block in the subshell. 
+
+
+q. You want to create a file named hostname and containing the text easy1.easynomad.com. However, you don't wantt o overwrite any existing file byu that name. 
+
+A. 	cat hostname || echo eassy1.easynomad.com > hostname 	--> this will echo to the hostname file only when the hostname file does not exist. 
+	cat hostname && echo easy1.easynomad.com >hostname	--> this will first echo hostname and then execute other command (since echo ends with a exit code =0 ) and then echoes to the hostname file
+	cat hostname >> echo easy1.easynomad.com > hostname	--> if there is no file by the name of 'easy1.easynomad.com' then it throws an error else redirects the contents of easy1.easynomad.com to hostname file. This is an incorrect usage. 
+	cat hostname | echo easy1.easynomad.com > hostname	--> echoes hostname and then easy1.easynomand.com (overwrites) to hostname. Incorrect usage. 
+	cat hostname | echo easy1.easynomad.com >> hostname	--> echoes hostname and then easy1.easynomand.com to hostname. Incorrect usage. 
+
+
+
+
+
+SHELL SCRIPTING INTRO:
+======================
+#! /bin/sh		--> this is called sharp bang and is used to identify the command interpreter. 
+ls /usr/devarch/userlistdir || mkdir /usr/devarch/userlistdir
+touch /usr/devarch/userlistdir
+echo the devarch masteruserlist has been created
+
+
+

@@ -1,0 +1,35 @@
+findstr: equivalent  of grep in windows
+
+eg.,
+
+Microsoft Windows [Version 6.1.7600]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+C:\Users\tapas>dir
+ Volume in drive C is Acer
+ Volume Serial Number is 8EDE-7C70
+
+ Directory of C:\Users\tapas
+
+17-Apr-14  01:00 AM    <DIR>          .
+17-Apr-14  01:00 AM    <DIR>          ..
+19-Sep-13  09:13 AM    <DIR>          Contacts
+20-Apr-14  01:29 PM    <DIR>          Desktop
+20-Apr-14  04:20 PM    <DIR>          Documents
+27-Apr-14  08:02 PM    <DIR>          Downloads
+13-Apr-14  05:28 PM    <DIR>          Favorites
+13-Apr-14  05:41 PM    <DIR>          Links
+19-Mar-14  05:44 PM    <DIR>          Music
+13-Apr-14  05:41 PM    <DIR>          OneDrive
+20-Apr-14  01:03 AM    <DIR>          Pictures
+19-Sep-13  09:13 AM    <DIR>          Saved Games
+13-Apr-14  06:09 PM    <DIR>          Searches
+17-Apr-14  01:31 AM             2,709 SuperPutty.settings
+19-Sep-13  09:13 AM    <DIR>          Videos
+               1 File(s)          2,709 bytes
+              14 Dir(s)  115,116,146,688 bytes free
+
+C:\Users\tapas>dir | findstr Contacts
+19-Sep-13  09:13 AM    <DIR>          Contacts
+
+C:\Users\tapas>

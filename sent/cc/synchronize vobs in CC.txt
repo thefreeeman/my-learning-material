@@ -1,0 +1,43 @@
+http://www.philforhumanity.com/ClearCase_Support_48.html
+
+
+ClearCase Support: How to Synchronize 2 VOBs
+============================================
+
+First, the ClearCase administrator at the site that has the needed data must create and export a synchronization packet to the site that needs that data. Here is an example of the command that does this action. Keep in mind that this command must be run on the VOB server that hosts the VOB, as the VOB owner, and the destination VOB replica must be known. 
+
+/usr/atria/bin/multitool syncreplica –export –nc –fship replica:VOB_REPLICA@vob:VOB_TAG
+
+This command will create a synchronization packet file in the outgoing shipping bay; by default, this directory is located here: 
+/usr/atria/shipping/ms_ship/outgoing/. 
+
+Then this synchronization packet will be shipped to the remote replica's VOB server, and then the packet file will be deleted. 
+
+On the receiving replica, a ClearCase administrator must import the synchronization packet file that was just received. The synchronization packet will be located on the VOB replica's host server in the incoming shipping bay; by default, this directory is located here: 
+/usr/atria/shipping/ms_ship/incoming/. 
+
+So, the importing command must be run as the VOB owner and on the VOB host server. Here is the command to import a single file: 
+/usr/atria/bin/multitool syncreplica – import SYNC_PACKET_FILE
+
+Alternatively, you can import all the available synchronization packets for a single VOB with this command: 
+/usr/atria/bin/multitool syncreplica – import –vob VOB_TAG -receive
+
+Or, you can import all the synchronization packets for every VOB with this command: 
+/usr/atria/bin/multitool syncreplica – import -receive
+
+
+That's it! You have just synchronized one VOB replica with other VOB replica. 
+
+
+
+so the commands are:
+multitool syncreplica -export -nc -fship replica:VOB-REPLICA@vob:VOB_TAG
+multitool syncreplica -import -receive
+multitool syncreplica -import -vob VOB_TAG -receive
+multitool syncreplica -import SYNC_PACKET 
+
+
+Directory Locations:
+Multitool directory: /ur/atria/bin/multitool
+Incoming Shipping Bay: /usr/atria/shipping/ms_ship/incoming
+Outgoing Shipping Bay: /sur/atria/shipping/ms_ship/outgoing

@@ -1,0 +1,165 @@
+G I T
+- - - 
+Types of VCSs (Version Control Systems):
+ Centralized Version Control Systems (CVCSs) - CVS(Concurrent Versions System), Subversion, and Perforce - have a single server that contains all the versioned files, and a number of clients that check out files from that central place
+ 
+ Distributed Version Control Systems (DVCSs) -  (such as Git, Mercurial, Bazaar or Darcs) - clients don’t just check out the latest snapshot of the files: they fully mirror the repository
+
+
+Creation of GIT:
+----------------
+Some of the goals of the new system were as follows:
+
+    Speed
+    Simple design
+    Strong support for non-linear development (thousands of parallel branches)
+    Fully distributed
+    Able to handle large projects like the Linux kernel efficiently (speed and data size)
+
+Git Basics:
+-----------
+snapshots not differences:
+	Other systems tend to store data as changes to a base version of each file.
+	Git stores data as snapshots of the project over time:
+		  - Git thinks of its data more like a set of snapshots of a mini filesystem. 
+		  - Every time you commit, or save the state of your project in Git, it basically takes a picture of what all your files look like at that moment and stores a reference to that snapshot.
+		  - To be efficient, if files have not changed, Git doesn’t store the file again—just a link to the previous identical file it has already stored. 
+		  - This makes Git more like a mini filesystem with some incredibly powerful tools built on top of it, rather than simply a VCS. 
+
+	Git has Integrity
+		- Everything in Git is check-summed before it is stored and is then referred to by that checksum.  This means it’s impossible to change the contents of any file or directory without Git knowing about it.
+		-  You can’t lose information in transit or get file corruption without Git being able to detect it.
+		- SHA-1 hash. This is a 40-character string composed of hexadecimal characters (0–9 and a–f) and calculated based on the contents of a file or directory structure in Git. A SHA-1 hash looks something like this:
+		24b9da6552252987aa493b52f8696cd6d3b00373
+		- Git stores everything not by file name but in the Git database addressable by the hash value of its contents.
+		
+The Three States
+-----------------
+	Git has three main states that your files can reside in: 
+	 - committed	:data is safely stored in your local database. 								(file version in the git directory)
+	 - modified		:you have changed the file but have not committed it to your database yet. 	(checkedout but not staged)
+	 - staged		:you have marked a modified file in its current version to go into your next commit snapshot.	(modified and added to the staging area)
+	 
+	 
+	 working directory			staging area			git directory(repository)
+	 		|							|						 |
+	 		|							|						 |
+			|				checkout the project				 |
+			|<---------<----------------|--------------<---------|
+			|							|						 |
+			|							|						 |
+			|							|						 |
+			|--stage the files--------->|						 |
+			|							|						 |
+			|							|------commit-->-------->|
+			|							|						 |
+			|							|						 |
+	 
+	Git directory:
+		is where Git stores the metadata and object database for your project. 
+		it is what is copied when you clone a repository from another computer.
+		
+	working directory:
+		 is a single checkout of one version of the project.
+	staging area:
+		 is a simple file, generally contained in your Git directory, that stores information about what will go into your next commit.
+		  It’s sometimes referred to as the index, but it’s becoming standard to refer to it as the staging area.
+		  
+The basic Git workflow goes something like this:
+    You modify files in your working directory.
+    You stage the files, adding snapshots of them to your staging area.
+    You do a commit, which takes the files as they are in the staging area and stores that snapshot permanently to your Git directory.
+
+	
+Git Installation
+----------------
+	libraries required for git installation:
+	Curl, zlib, openssl, expat, and libiconv
+	
+	commands to install dependencies:
+		on Fedora / alike:
+			$ yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel
+		on Debain /alike:
+			$ apt-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev
+
+
+	then compile and install
+		$ tar -zxf git-1.7.2.2.tar.gz
+		$ cd git-1.7.2.2
+		$ make prefix=/usr/local all
+		$ sudo make prefix=/usr/local install
+			
+	get git via git for updates:
+		$ git clone git://git.kernel.org/pub/scm/git/git.git
+		
+	$ yum install git	--> on fedora
+	$ apt-get install git	--> debian based
+	http://msysgit.github.io	--> windows
+	
+First-Time Git Set-Up
+----------------------
+	git config: 	the tool that lets you get and set configuration variables that control all aspects of Git
+	/etc/gitconfig	:for all users on the system and all their repositories
+					 use 'git config --system' to read and write from this file specifically. 
+	~/.gitconfig	:user specific. 
+					use 'git config --global'  to read and write from this file specifically. 
+	.git/config		:of whateveer repo you are currently using. 
+					specific to that single repository	
+					values in .git/config overrides the values present in /etc/gitconfig. 
+	On Windows		: in the $HOME directory (%USERPROFILE% in Windows environment (C:\Documents and Settings\$USER or C:\Users\$USER )
+					or in /etc/gitconfig	-- relative to MSys root (where you install git on Windows when running the installer).
+					
+
+C:\Users\444756>git --version
+git version 1.9.4.msysgit.1
+
+Your Identity
+--------------
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+	- only once if you pass the --global option, 
+	- to override this with a different name or e-mail address for specific projects, run the command without the --global option in that project.
+	
+Your Editor and Diff Tool
+------------------------------
+$ git config --global core.editor emacs
+$ git config --global merge.tool vimdiff
+	- Git accepts kdiff3, tkdiff, meld, xxdiff, emerge, vimdiff, gvimdiff, ecmerge, and opendiff as valid merge tools.
+
+Your Settings:	
+--------------
+git config --list
+git config {key}
+
+
+C:\Users\444756>git config --list
+core.symlinks=false
+core.autocrlf=true
+color.diff=auto
+color.status=auto
+color.branch=auto
+color.interactive=true
+pack.packsizelimit=2g
+help.format=html
+http.sslcainfo=/bin/curl-ca-bundle.crt
+sendemail.smtpserver=/bin/msmtp.exe
+diff.astextplain.textconv=astextplain
+rebase.autosquash=true
+user.name=Tapas
+user.email=tapask09@gmail.com
+
+
+C:\Users\444756>git config user.name
+Tapas
+
+Help
+----
+$ git help <verb>
+$ git <verb> --help
+$ man git-<verb>
+
+eg: $ git help config
+On windows:
+C:\Users\444756>git help config
+Launching default browser to display HTML ...
+

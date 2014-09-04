@@ -1,0 +1,33 @@
+<!--This XML file does not appear to have any style information associated with it. The document tree is shown below.-->
+<!--  Edited by XMLSpy  -->
+
+<bookstore> <!-- this is the ROOT NODE. ALl other nodes are contained in the bookstore node -->
+<book category="cooking">	<!-- there are 4  Book Nodes contained within the BookStore Node-->
+<title lang="en">Everyday Italian</title>	<!-- There are 4nodes contained in the Book node-->
+<author>Giada De Laurentiis</author>		<!--There is a text node contained in each of the 4 nodes contained in the book node -->
+<year>2005</year>
+<price>30.00</price>
+</book>
+<book category="children">
+<title lang="en">Harry Potter</title>
+<author>J K. Rowling</author>
+<year>2005</year>
+<price>29.99</price>
+</book>
+<book category="web">
+<title lang="en">XQuery Kick Start</title>
+<author>James McGovern</author>
+<author>Per Bothner</author>
+<author>Kurt Cagle</author>
+<author>James Linn</author>
+<author>Vaidyanathan Nagarajan</author>
+<year>2003</year>
+<price>49.99</price>
+</book>
+<book category="web" cover="paperback">
+<title lang="en">Learning XML</title>
+<author>Erik T. Ray</author>
+<year>2003</year>
+<price>39.95</price>
+</book>
+</bookstore>
