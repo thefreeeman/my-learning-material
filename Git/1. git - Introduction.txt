@@ -1,10 +1,15 @@
 G I T
 - - - 
+Version Control: Version Control is a system that records changes to a file or a set of files overtime, so that you can recall specific versions later. 
+
 Types of VCSs (Version Control Systems):
  Centralized Version Control Systems (CVCSs) - CVS(Concurrent Versions System), Subversion, and Perforce - have a single server that contains all the versioned files, and a number of clients that check out files from that central place
+  - These had single point of failure, the server itself. 
  
- Distributed Version Control Systems (DVCSs) -  (such as Git, Mercurial, Bazaar or Darcs) - clients don’t just check out the latest snapshot of the files: they fully mirror the repository
-
+ Distributed Version Control Systems (DVCSs) -  (such as Git, Mercurial, Bazaar or Darcs, DCVS, ArX, Monotone, Codeville etc) - clients don't just check out the latest snapshot of the files: they fully mirror the repository
+  - Every checkout here is a backup of the data
+  - Many of these systems deal well with remote repositories
+  - hence suport several types of workflows such as hierarchical models (that are not possible in the CVCSs)
 
 Creation of GIT:
 ----------------
