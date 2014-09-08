@@ -1,0 +1,77 @@
+<<<<<<< Updated upstream
+=======
+------------------
+git log
+			commit 350a97518635e2d01f5c2dc2d9c85f147552d86b
+			Author: Tapas <tapask09@gmail.com>
+			Date:   Mon Sep 8 11:48:18 2014 +0530
+
+				Adding 4
+------------------
+git show					--> shows the last commit information
+------------------
+git log --abbrev-commit --pretty=oneline			sha1 is 40 characters long 
+		350a975 Adding 4
+		6536f35 Adding 6.1 Selecting a version.txt
+		af1350e Creating a new git command refernce file and adding
+		913707c Initial commit on my-learning-material
+		64cdcbb Initial commit
+------------------
+git rev-parse master		--> shows which sha your branch points to
+		350a97518635e2d01f5c2dc2d9c85f147552d86b
+------------------
+git reflog					--> a log of your branch and HEAD references; the information is strictly local and differs for different repo
+		350a975 HEAD@{0}: commit: Adding 4
+		6536f35 HEAD@{1}: commit: Adding 6.1 Selecting a version.txt
+		af1350e HEAD@{2}: checkout: moving from commands-reference to master
+		af1350e HEAD@{3}: checkout: moving from master to commands-reference
+		af1350e HEAD@{4}: merge commands-reference: Fast-forward
+------------------
+git show master@{yesterday}	to see where the branch master was yesterday
+		commit af1350e75d282832ac1664a935676406a8beec1e
+		Author: Tapas <tapask09@gmail.com>
+		Date:   Thu Sep 4 15:00:54 2014 +0530
+
+			Creating a new git command refernce file and adding
+
+		diff --git a/Git/git-commands-refernce.txt b/Git/git-commands-refernce.txt
+		new file mode 100644
+		index 0000000..1eed860
+		--- /dev/null
+		+++ b/Git/git-commands-refernce.txt
+		@@ -0,0 +1 @@
+		+This is a test commands file
+		\ No newline at end of file
+------------------		
+git show 64cdcbb			to see where the branch was at this sha1 ; same as above just with the sha1
+------------------
+git show master@{64cdcbb}	same as git show master, but only shows the last commit details.
+------------------
+git log -g					to show the reflog output formatted like git log
+			commit 350a97518635e2d01f5c2dc2d9c85f147552d86b
+			Reflog: HEAD@{0} (Tapas <tapask09@gmail.com>)
+			Reflog message: commit: Adding 4
+			Author: Tapas <tapask09@gmail.com>
+			Date:   Mon Sep 8 11:48:18 2014 +0530
+
+				Adding 4
+				
+------------------
+git show master@{2.months.ago}
+------------------
+git log origin/master..HEAD	--> shows the preview of what is to be pushed to the remote
+or git log origin/master..	--> HEAD not required if your current branch is tracking the origin/master branch
+commit 21093ed200debe71f4db5bf3d0b426f2fc4087f8
+Author: Tapas <tapask09@gmail.com>
+Date:   Mon Sep 8 12:22:07 2014 +0530
+
+    updating 6.1
+------------------
+git log experiment..master		--> shows all commits that are in the master but not in experiment
+git log master..experiment		--> shows all commuts that are int he experiment but not in master
+git log test_branch_v1 --not master	--> shows log of all commits in test_branch_v1 but not in the master branch
+git log test_branch_v1 origin/master --not master	--> all commits that are reachable by test_branch_v1 and remote master but not the local master
+git log origin/master...master	--> there are three dots; it shows what commits are reachable by either master or test_branch_v1 but not in both the branches. 
+git log --left-right origin/master...master	--> shows which side of the range the commit is in. 
+adding one more line for stash
+>>>>>>> Stashed changes
