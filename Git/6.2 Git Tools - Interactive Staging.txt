@@ -7,3 +7,4 @@ added change for stashing
 added change for stashing
 
 one more line to check the stash thing
+this is before applying the stash
