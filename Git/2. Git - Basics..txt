@@ -81,6 +81,10 @@ $ git commit -a -m "some commit message here"
 $ git status
 $ git diff
 $ git status --cached
+$ git diff	--> to know exactly what has changed and not just the files that have changed
+$ git diff --cached	--> to know what exactly will go in your next commit
+$ git diff --staged	--> in version 1.6 and later, same as above most probably. 
+
 
 http://git-scm.com/book/en/Git-Basics-Viewing-the-Commit-History
 $ git log
