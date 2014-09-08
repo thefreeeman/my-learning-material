@@ -8,3 +8,13 @@ git config user.name
 $ git help <verb>
 $ git <verb> --help
 $ man git-<verb>
+-------------------------
+$cd <project-directory>
+$ git init
+
+$ git add *.c
+$ git commit -m 'initial project version'
+-------------------------
+$git clone [url]
+
+-------------------------
