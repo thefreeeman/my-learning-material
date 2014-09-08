@@ -90,7 +90,7 @@ http://git-scm.com/book/en/Git-Basics-Viewing-the-Commit-History
 $ git log
 $ git log -p -2	---> to get the diff in the logs as well as only the last two entries. 
 $ git log -U1 --word-diff	--> to get the word diffs, useful in case of large word files
-$ git log --status			--> prints below each commit entry a list of the modified files
+$ git log --stat			--> prints below each commit entry a list of the modified files
 other options are --pretty, --oneline, --short, --full, --fuller
 $ git log --pretty=format: %h - %an, %ar : %s
 							-- where %h is the abbreviated hash
