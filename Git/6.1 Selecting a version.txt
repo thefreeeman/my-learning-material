@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> test_branch_v1
 ------------------
 git log
 			commit 350a97518635e2d01f5c2dc2d9c85f147552d86b
@@ -71,3 +76,7 @@ git log test_branch_v1 --not master	--> shows log of all commits in test_branch_
 git log test_branch_v1 origin/master --not master	--> all commits that are reachable by test_branch_v1 and remote master but not the local master
 git log origin/master...master	--> there are three dots; it shows what commits are reachable by either master or test_branch_v1 but not in both the branches. 
 git log --left-right origin/master...master	--> shows which side of the range the commit is in. 
+=======
+adding one more line for stash
+
+one more line to check the stash thing
