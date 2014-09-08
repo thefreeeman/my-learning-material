@@ -1,0 +1,5 @@
+Distributed Git - Contributing to a project
+---------------------------------------------
+
+git diff --check	--> identified possinle whitespace errors
+git add --patch		--> to partially stage files
