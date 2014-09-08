@@ -1,0 +1,10 @@
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+$ git config --global core.editor emacs
+$ git config --global merge.tool vimdiff
+
+git config --list
+git config user.name
+$ git help <verb>
+$ git <verb> --help
+$ man git-<verb>

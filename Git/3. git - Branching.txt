@@ -1,0 +1,37 @@
+B R A N C H I N G 
+-------------------
+
+When you commit in Git, 
+	Git stores a commit object that contains --> a pointer to the snapshot of the content you staged
+											 --> the author and message metadata
+											 --> 0 or more pointers to the commit or commits that were the direct parents of this commit. 
+											 (0 parents for the first commit, one parent for a normal commit, and multiple parents for a commit that results from merge of two or more branches. )
+											 
+Let's say there is a directory contains three files:
+you stage them all and commit
+staging the files does:
+	checksums each one, and stores that version of the file in the Git repo (blobs in git)	- 3 objects
+	Adds the checksum to the staging area
+git commit does:
+	checksums the project directories and stores them as tree objects in the Git repo. - 1 object
+	creates a commit object that has the metadata and the pointer to the root project tree object. so it can recreate the snapshot when required. - 1 object
+	
+
+	
+		commit object 				----> tree object							--> blobs
+		(commit metadata				 (contains checksums of all					(3 blobs here for 
+			+							 project directories						the contents
+		pointer to the 							+										of 3 files here)
+		project root tree)					specifies which files 
+											are stored as which blobs)
+			
+			
+							Figure 3-1. Single commit repository data
+
+
+some quick understanding about merging:
+git checkout master	--> here master is the branch where you want to merge into. so you are checking out the master branch
+git merge issue53	--> here issue53 is the branch that you want to be merged into master. 
+
+so basically we have code to be merged from issue53 branch to the master branch. we point to the master branch by checking it out and then bring in the changes (merge the changes) from issue53 to the master branch. the "master" branch pointer moves to issue53 or to a new commit based on the type of the merge. 
+
