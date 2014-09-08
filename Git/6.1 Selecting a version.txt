@@ -74,4 +74,5 @@ git log test_branch_v1 origin/master --not master	--> all commits that are reach
 git log origin/master...master	--> there are three dots; it shows what commits are reachable by either master or test_branch_v1 but not in both the branches. 
 git log --left-right origin/master...master	--> shows which side of the range the commit is in. 
 adding one more line for stash
->>>>>>> Stashed changes
+
+one more line to check the stash thing

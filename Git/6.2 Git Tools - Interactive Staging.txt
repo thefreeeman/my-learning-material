@@ -2,3 +2,5 @@ git add -i or git add --interactive		--> same as git status but more informative
 git add -p or git add --patch			--> partial file staging
 few more changes
 added change for stashing
+
+one more line to check the stash thing
