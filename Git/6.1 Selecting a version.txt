@@ -67,3 +67,7 @@ Date:   Mon Sep 8 12:22:07 2014 +0530
 ------------------
 git log experiment..master		--> shows all commits that are in the master but not in experiment
 git log master..experiment		--> shows all commuts that are int he experiment but not in master
+git log test_branch_v1 --not master	--> shows log of all commits in test_branch_v1 but not in the master branch
+git log test_branch_v1 origin/master --not master	--> all commits that are reachable by test_branch_v1 and remote master but not the local master
+git log origin/master...master	--> there are three dots; it shows what commits are reachable by either master or test_branch_v1 but not in both the branches. 
+git log --left-right origin/master...master	--> shows which side of the range the commit is in. 
