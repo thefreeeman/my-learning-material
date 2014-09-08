@@ -56,5 +56,14 @@ git log -g					to show the reflog output formatted like git log
 				
 ------------------
 git show master@{2.months.ago}
-
 ------------------
+git log origin/master..HEAD	--> shows the preview of what is to be pushed to the remote
+or git log origin/master..	--> HEAD not required if your current branch is tracking the origin/master branch
+commit 21093ed200debe71f4db5bf3d0b426f2fc4087f8
+Author: Tapas <tapask09@gmail.com>
+Date:   Mon Sep 8 12:22:07 2014 +0530
+
+    updating 6.1
+------------------
+git log experiment..master		--> shows all commits that are in the master but not in experiment
+git log master..experiment		--> shows all commuts that are int he experiment but not in master
