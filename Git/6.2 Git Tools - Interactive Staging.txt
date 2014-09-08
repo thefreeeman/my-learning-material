@@ -1,10 +1,10 @@
 git add -i or git add --interactive		--> same as git status but more informative
 git add -p or git add --patch			--> partial file staging
 few more changes
-<<<<<<< HEAD
-added change for stashing
-=======
 added change for stashing
 
 one more line to check the stash thing
 this is before applying the stash
+this change is in test_branch_v1 and is to check the git stash apply --index thing
+
+this change is in test_branch_v1 and is to check the git stash apply --index thing
