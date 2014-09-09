@@ -35,3 +35,84 @@ git merge issue53	--> here issue53 is the branch that you want to be merged into
 
 so basically we have code to be merged from issue53 branch to the master branch. we point to the master branch by checking it out and then bring in the changes (merge the changes) from issue53 to the master branch. the "master" branch pointer moves to issue53 or to a new commit based on the type of the merge. 
 
+
+HEAD:
+------
+In Git, this is a pointer to the local branch you’re currently on
+when you create a branch, say test, from master: the master, test and HEAD all point to the same commit
+when you checkout the test branch, HEAD moves and points to the test branch
+when you commit something in the test branch, then the HEAD and test both move ahead to point to to the next commit further in the test branch. 
+when you switch workspace by doing a checkout on the master branch, the HEAD moves to the master branch and with further commmits on this branch, the HEAD and master both move and point to the further commits on the master branch. 
+
+
+
+git mergetool --> tool (GUI) to help resolve merge conflicts
+git branch		--> gives a list of all the branches. * specifies the current branch
+git branch -v	--> gives a list of all branches with the last commit on each branch. * specifies the current branch
+git branch --merged	--> lists the branches that are already merged into your branch
+git branch --no-merged	--> lists the branches that have work that you've not yet merged in
+git branch -d testing	--> deletes the testing branch, this wont work  if you have a dirty workspace 
+git branch -D testing	--> works even with dirty workspace, but to be used CAREFULLY. better commit changes and then delete using -d option
+
+Remote branches:
+references to the state of the branches on the remote repositories. 
+
+
+git remote add teamone git://git.team1.ourcompany.com
+git fetch teamone
+
+
+git push		--> to synchronize your local work with the remote 
+git push origin serverfix --> Git automatically expands it to: git push origin /refs/heads/serverfix:refs/heads/serverfix
+git push origin serverfix:serverfix	--> same as above
+git push origin serverfix:awesomebranch	--> to push your changes from local serverfix to the remote awesomebranch on origin server
+git fetch origin/serverfix		--> you DONOT have a local serverfix branch but only the origin:serverfix branch. to have a local editable copy use the following:
+git checkout -b serverfix origin/serverfix	--> creates a local branch serverfix that is setup t track the remote serverfix from origin.
+
+
+Tracking branches:
+ - when you create a local branch from a remote branch it automatically creates what we call the tracking branch. 
+ - trackking branches are local branches that have direct relationship to the remote branches. 
+ - so on a tracking branch git push and pull know automatically which server to push the data to or where to fetch the refernces from and automatically merge in the corresponding branch. 
+  - when a repo is cloned, automatically master branch is created that does the tracking for origin/master.
+ 
+ 
+ Ways to setup tracking branches:
+ --------------------------------
+ $ git checkout -b serverfix origin/serverfix
+ $ git checkout --track origin/serverfix	--> Branch serverfix set up to track remote branch serverfix from origin.Switched to a new branch 'serverfix'
+ $ git checkout -b somelocalbranch origin/serverfix
+ 
+ 
+ Deleting remote branches
+ ------------------------
+ $ git push origin  :serverfix --> take nothing from my end and make it serverfix, so basically deletes the remote serverfix branch here. 
+ 
+ 
+ 
+ Merging and Rebasing:
+ --------------------
+ http://git-scm.com/book/en/Git-Branching-Rebasing
+
+ With the rebase command, you can take all the changes that were committed on one branch and replay them on another one.
+ if you have two branches: master and experiment
+ Merge:
+ ------
+ $ git checkout master
+ $ git merge experiment --> here experiment is the branch that is being merged in. Changes are being merged into master.merging the changes from experiment to master
+ the pointer master moves ahead in this case.
+ 
+ $git checkout experiment
+ $ git rebase master --> taking the changes from master and replaying the changing on experiment
+ the pointer experiment moves ahead in this case
+ 
+ (Rebase process:
+ It works by going to the common ancestor of the two branches (the one you’re on and the one you’re rebasing onto), getting the diff introduced by each commit of the branch you’re on, saving those diffs to temporary files, resetting the current branch to the same commit as the branch you are rebasing onto, and finally applying each change in turn)
+ 
+ 
+ how to remember:
+ ----------------
+ git rebase master --> goes literally as rebase master with the changes of the current branch
+ git merge experiment --> goes literally as merge experiment into the current branch
+ 
+ 
