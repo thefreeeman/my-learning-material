@@ -1,0 +1,13 @@
+clearcase
+ci using jenkins
+git
+ant
+maven
+ruby
+perl
+chef
+basics of configuration management, continuous integration and continuous delivery
+
+
+is clearcase dcvs or cvcs? (distruted versus centralized)
+
