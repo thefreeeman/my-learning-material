@@ -1,0 +1,10 @@
+http://stackoverflow.com/questions/1838873/visualizing-branch-topology-in-git
+
+https://github.com/crc8/GitVersionTree
+
+https://github.com/esc/git-big-picture
+
+http://stackoverflow.com/questions/1057564/pretty-git-branch-graphs
+
+http://stackoverflow.com/questions/3666953/showing-git-branch-structure
+
