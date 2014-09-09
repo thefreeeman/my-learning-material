@@ -112,7 +112,7 @@ Tracking branches:
  
  how to remember:
  ----------------
- git rebase master --> goes literally as rebase master with the changes of the current branch
+ git rebase master --> goes literally as rebase current branch on the master. same as $ git rebase master featureA
  git merge experiment --> goes literally as merge experiment into the current branch
  
  
