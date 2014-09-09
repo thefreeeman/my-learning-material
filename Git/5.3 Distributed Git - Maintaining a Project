@@ -1,0 +1,66 @@
+5.3 Distributed Git - Maintaining a Project
+-------------------------------------------
+
+applying patches received through email:
+
+Applying patches generated through the Unix diff or git diff commands:
+-----------------------------------------------------------------------
+ $ git apply /tmp/patch-ruby-client.patch	--> when patch created through git diff or Unix diff command and patch  is saved at the /tmp/..
+ $ git 'apply check' 	--> to see if a patch applies cleanly before actually applying it. 
+
+" $ git apply" is same as the Unix command - "patch -p1", but there are a few differences:
+	* the 'git apply' is more paranoid than 'patch' command & accepts fewer fuzze maches than patch command
+	* it also handles file adds, deltes and renames described in the 'git diff' format. 
+	* 'git apply' is apply-all or abort-all. 
+
+Applying patches generated through format-patch command:
+-----------------------------------------------------------------------
+'git am' is used to apply patches generated through 'git format-patch' command. 
+Technically 'git am' is built to read mbox file. 
+mbox file is a simple, plain text-format for storing one or more email messages in one text file. 
+
+ $ git am <patch-file>.patch
+ $ git am -3 -i mbox		--> here 3 is for 3 way merge and i is for interactive mode (asks at each patch whether or not to apply)
+
+
+Testing changes of a feature in a branch of a remote repo of another user:
+---------------------------------------------------------------------------
+ $ git remote add jessica git://github.com/jessica/myproject.git
+ $ git fetch jessica
+ $ git checkout -b rubyclient jessica/rubyclient
+
+
+Pulling changes from a repo without saving the remote url for further reference:
+--------------------------------------------------------------------------------
+ $ git pull git://github.com/onetimeguy/myproject.git
+
+
+Determining what is introduced:
+------------------------------
+git log contribbranch --not master	--> to see the changes that were applied to the contribbranch and not ont he master branch
+git log contribbranch --not master -p
+
+The above is similar to the command '$git log master..contribbranch -p'
+
+
+To see a full diff of what would happen if you were to merge one tropic branch to another branch:
+----------------------------------------------------------------------------------------------
+ $git diff master --> this might not give the correct result since diff compares the snapshots of the last commit on the topic branch you're on and the master branch. since the master branch might have moved ahead since yu created this branch. 
+
+so use the command:
+ $git merge-base contribbranch master
+ 36c7dba2c95e6bbb78dfa822519ecfec6e1ca649
+ $ git diff 36c7db 
+
+
+the above is same as the following command:
+$git diff master...contrib --> shows the work that the current topic branch has introduced since its common ancestor with master 
+
+
+Cherry picking particular commits from the topic branches:
+$ git cherry-pick e43a6fd3e94888d76779ad79fb568ed180e5fcdf --> where e4...is the hash of the particular commit that you want to apply. 
+
+Cherry pick is like a rebase for a specific commit. 
+
+
+

@@ -1,3 +1,4 @@
+following are the todo's:
 clearcase
 ci using jenkins
 git
@@ -10,4 +11,9 @@ basics of configuration management, continuous integration and continuous delive
 
 
 is clearcase dcvs or cvcs? (distruted versus centralized)
+setup a git server
+creating patches and sending email through git
 
+
+tagging :
+http://git-scm.com/book/en/Distributed-Git-Maintaining-a-Project
