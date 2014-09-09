@@ -25,7 +25,7 @@ Cloning an Existing Repository
 ------------------------------
 $git clone [url]
 eg: clone the Ruby git repo:
-$ git clone git://github.com/schacon/grit.git
+$ git clone git://github.com/schacon/grit.git or git clone https://github.com/thefreeeman/my-learning-material.git mylearningGit --> this clones the repo to a 'mylearningGit' folder locally. 
 	- creats a dir names grit
 	- initializes a .git dir inside it
 	- pulls down all data for the repo 
@@ -79,18 +79,16 @@ $ git commit -v
 $ git commit -m "some commit message here"
 $ git commit -a -m "some commit message here"
 $ git status
-$ git diff
-$ git status --cached
 $ git diff	--> to know exactly what has changed and not just the files that have changed
 $ git diff --cached	--> to know what exactly will go in your next commit
 $ git diff --staged	--> in version 1.6 and later, same as above most probably. 
 
-
 http://git-scm.com/book/en/Git-Basics-Viewing-the-Commit-History
 $ git log
+$ git log -1	--> shows log for the latest commit only
 $ git log -p -2	---> to get the diff in the logs as well as only the last two entries. 
 $ git log -U1 --word-diff	--> to get the word diffs, useful in case of large word files
-$ git log --stat			--> prints below each commit entry a list of the modified files
+$ git log --stats    		--> gives an abbreviated stats of the files changed with each commit
 other options are --pretty, --oneline, --short, --full, --fuller
 $ git log --pretty=format: %h - %an, %ar : %s
 							-- where %h is the abbreviated hash
@@ -109,8 +107,10 @@ $ gitk --> GUI for visualizing history
 
 $ git commit -m 'initial commit'
 $ git add forgotten_file
-$ git commit --amend
-$ git checkout -- benchmarks.rb
+$ git commit --amend		--> this is a useful command to amend an existing commit with the staged changes. New comment can be given. 
+$ git reset HEAD benchmarks.rb	--> this unstages the file benchmarks.rb  by resetting the HEAD. 
+$ git checkout -- benchmarks.rb --> this discards the changes that have been made to the benchmarks.rb file
+
 $ git remote	--> To see which remote servers you have configured
 $ git remote -v	--> To see which remote servers you have configured, with the url for the shortname
 $ git remote add [shortname] [url]	--> To add a new remote Git repository as a shortname 
@@ -128,7 +128,7 @@ $ git pull -->  to automatically fetch and then merge a remote branch into your 
 
 $ git push [remote-name] [branch-name]. --> When you have your project at a point that you want to share, you have to push it upstream
 $ git push origin master		--> to push your master branch to your origin server ((again, cloning generally sets up both of those names for you automatically))
-
+$ git remote show origin	--> gives information fora particular remote -- origin
 $ git remote rename pb paul	-->  to rename pb to paul
 $ git remote rm paul		-->  to remove a reference for some reason
 $ git tag					--> list available tags, alphabetically
@@ -168,3 +168,14 @@ $ git tag -a v1.2 -m 'version 1.2' 9fceb02
 git push origin [tagname]		--> transferring tags to the remote servers.  This process is just like sharing remote branches.  git push command doesn’t 		transfer tags to remote servers.
 
 $ git push origin --tags		-->  transfer all of your tags to the remote server that are not already there.
+
+
+
+Creating Git Aliases:
+--------------------
+examples:
+	$ git config --global alias.visual '!gitk'	--> to create alias of an external command (thats not part of the git command set)
+	$ git config --global alias.last 'log -1 HEAD'	--> this can be used as $ git last
+	$ git config --global alias.unstage 'reset HEAD' --> used as $ git unstage fileA
+	$ git config --global alias.co checkout		--> $ git co
+	$ git config --global alias.br branch		--> $ git br
