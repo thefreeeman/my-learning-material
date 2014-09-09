@@ -19,7 +19,6 @@ $git clone [url]
 
 -------------------------
 
-
 Q: How to find the current branch?
 A: git status or git branch -v
 
@@ -43,5 +42,4 @@ A: status show the following:
 	4. what changes are yet to be staged
 
    diff shows exactly what chages have been made in which files
-
 
