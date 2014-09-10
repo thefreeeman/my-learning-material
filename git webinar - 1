@@ -1,0 +1,120 @@
+Introduction to Git
+by Scott Chacon from Git
+
+
+github: source code hosting site
+
+git-scm.com
+http://gitref.org
+http://progit.org
+
+twitter handle: @chacon
+
+
+What is Git?
+open source, distributed version control system designed for speed and efficiency. 
+centralized version control system - perforce, svn, clearcase- database on one system  and clients download a snapshot from the Central Server by requesting the server, and make incremental changes on the snapshot. 
+
+distributed - clone a project and start working on the same. 
+
+git uses its own propreitary database. its immutable and its easy to access as well
+
+(almost) everything is localdd the 
+(almost) never remotes data --> it does not re-write the history by deleting it, just he pointer is deleted. you can always go back through the logs. almost nothingis removed once committed. 
+
+
+in git when you add a file it forgets about the name of the file and stores a key value pair with the key being the sha1 (called as shawone) hash and the value being the contents of the file. so you give me the sha1 hash and I give you back the contents. so the contents are what would go in the next commit of the file and not the file itself. so git is basically different from svn or CC in these terms. 
+
+git commit - records a manifest. 
+
+everything is checksumed. so anything changes chanegs t he checksum too. 
+the way you access the data is through checksums. 
+
+sha1 hash is 40 characters + 1 carriage return  = 41 characters. 
+
+
+locally saved as complete files 
+when pushed then the files are delta compressed. 
+
+
+
+first steps:
+to have a local db you dont need to have a node. 
+git init - you have a git repository. 
+git status -s - gives git status in a short form. 
+git merge --ff-only blue --> fast forward merge only to thre blue branch. 
+
+whats something like that tree -a? 
+
+
+32:51 minutes over
+
+rebase is more complex. fetch and merge is recommened rather than pull. in corporate almost always merge rather than rebase
+
+recommened: keep on fetching and merging from master , say every day or two days or something, so that you always have the latest code and have conflicts only since the last merge. and then switch to master and then merge your branch into the master. 
+
+do fast forward merges only on your main branch. 
+
+$ merge merge --ff-only blue --> only do a fast forward merge from branch 'blue'. if ff only works then there wont be any conflicts. 
+
+
+
+
+hooks can be used to put policies. 
+git does not verify your username and user email etc, but hooks can be used for doing so. 
+
+in any folder start writing git init and start version controllig it. you dont need to put it anywhere. 
+.git is the database. you put it anywhere and you have all the data that you need. 
+
+tree -a????
+
+
+
+how do you find the commit? git finds commit through branches. refs--> heads contains the commit heads. 
+git clone -- >unauthenticated url almot always read only. 
+
+git add - stage the changes; this file I want it to be in my next snapshot when I do a git commit. 
+git commit - commit the version of the file when you ran a git add
+
+
+git add -p --> allows you to stage sections of the file, hunk by hunk.
+git commit -a --> wil stage eveerything except the untracked files. 
+git describe --> gives human readable form of , say something like build number or so...
+
+
+
+
+when you do a clone or fetch you pull down everything from the server. 
+branch is just a pointer. 
+HEAD is your current branch, a sumbolic reference. HEAD you will always have and will always point to the current branch. 
+
+creation of a branch is putting 41 haracters in a file. ??? or a commit? 
+git checkout -b issue 53 master --> creates, from master and then switchyes. 
+
+non fast forward if the branches are not reachable. wallks the tree finds the first common merge base  and then creates a new snapshot(???) that conains the chages from both the brnches. 
+
+
+git mergetool --> opens up a merge tool. 
+
+git branch -D --> the branch is stil there and its data is still there just that is not reachable from anywhere. No one can actually push the data to the server. 
+git log --oneline --graph --all --decorate
+git log branchB..branchA	-->  same as git log branchA ^branchB --> show me all the commits that are reachable by branch A and not reachable by branchB. 
+git log somebranch ^master --> this helps in knowing what is not there in master that is in somebranch. if nothing then we can delete the somebranch branch. 
+
+
+git log origin/master ^master --> do this after a fetch to know what is there that has been fethed from tghe server's mastrer that is not there in my master branch and needs to be merged. --> incoming commits. 
+
+git log ^origin/master master --> outgoing commits. 
+
+
+
+
+
+
+one of the advantages of git over svn is committing merge once a merge has been just done. 
+fast context switching
+easy merging
+easy branch creation. 
+
+to dos:
+bash completion stuff

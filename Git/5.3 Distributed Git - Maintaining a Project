@@ -62,5 +62,26 @@ $ git cherry-pick e43a6fd3e94888d76779ad79fb568ed180e5fcdf --> where e4...is the
 
 Cherry pick is like a rebase for a specific commit. 
 
+Build Number:
+--------------
+$git describe --> default is for master branch else use git describe banch-name
+it gives either the latest tag, if no commits have been amde else, the nearest tag, followed by number of commits, followed by the partial sha of the last commit
+
+somewhat like this:
+v1.6-1-g8a01074 --> here v1.6 is the nearest tag, followed by1 commit done on the master branch, folowed by the pasrtial sha of the last commit
+
+
+Preparing a release:
+--------------------
+creating an archive:
+
+$git archive master prefix='myproject/' | gzip > `git describe master`.tar.gz
+$git archive master prefix='myproject/' --format=zip > `git describe master`.zip
+
+
+The shortlog:
+-------------
+$git shortlog --no-merges master --not v1.0.1
+
 
 
