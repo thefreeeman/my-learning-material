@@ -1,0 +1,6 @@
+5.2 Distributed Git - Contributing to a Project
+----------------------------------------------
+
+$ git diff --check	--> to identify possible whitespace issues
+$ git add --patch	--> to partially stage files
+$ git log --no-merges

@@ -1,0 +1,56 @@
+3.6 Git Branching - Rebasing
+----------------------------
+Rebase is one of the ways to integrate changes from one branch to another. 
+9Merging is another way of doing the same. )
+
+scenario: 1
+-----------
+ there are two branches: 
+	- experiment 
+	- master
+
+Merge command set is as follows:
+$ git checkout master	--> sets master as the current branch
+$ git merge experiment 	--> 
+merge in the changes from experiment and move the HEAD on master to the next snapshot- either through fast forward or through the common ancester between the two branches and create a new snapshot to which the HEAD now points to. 
+
+Rebase command set is as follows:
+----------------------------------
+$ git checkout experiment 	--> sets 'experiment'as the current branch
+$ git rebase master 		--> sets 'master' as the branch you're rebasing onto.
+	a) finds the common ancestor b/w current branch (experiment) and the branch you're rebasing onto (master). 
+	b) gets the diff introduced by each commit on the braanch you're on. saves the diff to temp files. (current branch minus common ancestor)
+	c) resetting the current branch to the same commit as the branch you're rebasing onto. finally applying the changes in turn. (goes to the master branch and applies the delta on that branch. experiment now points to the new snapshot ont he master branch).  
+ 
+Now a fast forward merge can be done from the master branch so that master also has the chanegs of experiment. 
+so in case of rebase, the total set of commands is as follows:
+
+$ git checkout experiment 	--> 'experiment' is the branch to be rebased
+$ git rebase master		--> 'master' is the branch to be rebased onto. 
+$ git checkout master		--> to perform a fast forward merge from 'master'
+$ git merge experiment		--> to merge the changes from 'experiment' to the 'master' branch
+
+
+scenario: 2
+-----------
+There are three branches:
+	- master
+	- server
+	- client
+$ git rebase --onto master server client -->
+	a) checks out the client branch, sets it as current
+	b) figure out the patches from the common ancestor of the client and server branches. 
+	c) replay the patches onto the master branch (the branch being rebased onto). The resut of the integration, now, looks linear with 'client' now ahead of the 'master' in the same line of development. So, the HEAD of 'client' branch has moved ahead.
+  
+And not the master branch can be fast-forwarded to bring in the latest changes into it. 
+
+$ git checkout master
+$ git merge client
+
+So the complete set of commands in this case is: 
+$ git rebase --onto master server client
+$ git checkout master
+$ git merge client
+
+That's it!
+
