@@ -1,0 +1,128 @@
+a = gets # gets accepts a single line of data from the standard input
+puts a
+ruby test.rb < somedata.txt 	#piping data by redirecting data to a Ruby application
+				#output will be the first line in somedata.txt
+lines = readlines		#reading multiple lines in one go
+
+
+ruby linecount.rb < textfile.txt#linecount.rb contains the line: put readlines.length
+
+
+
+File.open("text.txt").each{ |line| puts line|		#accepts a code block and file closes automatically once the code block is finished. 
+#each technically reads from the file delimiter by delimiter, where the standard delimiter is a "newline" character. You can change this delimiter. 
+
+File.new("text.txt", "r").each { |line| puts line}	#retuns a file object referring to a file
+
+
+File.open("test.txt") do |f|	#opens test.txt and passes the file handle into the code block as f
+	puts f.gets		#takes a line of data from the file and prints it to the screen
+end
+
+
+f = File.new("test.txt", "r")	#file handle / object is directly assigned to f
+puts f.gets
+f.close				#file handle closed here
+
+
+
+
+File.open("test.txt").each(','){ |line| puts line} 	#reads the file delimiter by delimiter
+File.open("test.txt").each_byte{ |byte| puts byte}
+
+File.open("test.txt") do |f|
+	2.times {puts f.gets}	#gets called multiple times (2 times here) since gets is not an iterator as each or each_byte is
+end
+
+File.open("test.txt") do |f|
+	2.times {puts f.gets(',')}
+end
+
+
+File.open("test.txt") do |f|
+	2.times {puts f.getc }	#getc is an non-iterative version of each_byte
+end
+
+puts File.open("test.txt").readlines.join("--")	#reading an entire file into an array, split by lines, using readlines
+
+
+File.open("test.txt") do |f|		#reads arbitrary number of bytes from the file
+	puts f.read(6)
+end
+
+
+
+
+data = file.read(filename)	#shorcut for opening the file, using the standard read mode and then closing the file as well
+array_of_lines = file.readlines(filename)
+
+
+position within a file
+----------------------
+f = File.open("test.txt")
+puts f.pos
+puts f.gets
+puts f.pos
+f.pos = 30
+puts f.gets
+puts f.pos
+
+
+
+
+Writing to files
+----------------
+File.open("tets.txt","w") do |f|
+	f.puts "This is a test"
+end
+
+
+File modes
+-----------
+r	read-only. Pointer at start of the file
+r+	both reading and writing allowed. Pointer at start of the file. 
+w	write only. A new file is created from scratch (overwrites an old one as if new)
+w+	both reading and writing allowed. A new file is created from scratch (overwrites an old one as if new)
+a	append mode. pointer placed at the eof and writes make the file longer. 
+a+	both reading and writing are allowed. pointer placed at the eof and writes makes the file longer. 
+b	only used in windows. can be used in conjuction with any of the other mdoes. 
+
+
+
+
+f = File.new("test.txt","a")
+f.puts Time.now
+f.close
+
+
+
+
+f = File.open("test.txt","r+")
+puts f.gets		#reads the first line and places the pointer from the start of the file to the second line. 
+f.puts Time.now		#with pointer at the second line, puts a time at the second line and pushes the existing second line to the third line. pointer placed at third 				#line once this is completed
+puts f.gets		#reads the the third line and displays on the screen
+f.close			#closes the file handle.
+
+f = File.open("test.txt","r+")
+f.putc "X"		#replaces the first character
+f.close
+
+f = File.open("test.txt","r+")
+f.write "123456"		#replaces the first 6 characters to 123456
+f.close
+
+
+note: putc and writes overwrites the existing contents and puts inserts. 
+
+
+Renaming and Deleting files
+---------------------------
+File.rename("file1","file2")
+File.delete("file1","file2","file3"....)		#deleting multiple files at once
+File.unlink("file1")					#same as file deletion
+
+
+
+puts "Files are identical!" if File.identical? ("file1","file2")	#checks for identical files
+
+
