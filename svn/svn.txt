@@ -22,3 +22,31 @@ yum install subversion
 svn --version
 
 
+creating a repository:
+---------------------
+on server we have to install Apache httpd module and svnadmin tool
+su - 
+<password>
+yum intall mod_dav_svn subversion
+
+mod_dav_svn: this package allows access to a repo using HTTP, via the Apache httpd server
+
+subversion : this package installs the svnadmin tool. 
+
+
+/etc/httpd/conf.d/subversion.conf : this is where svn reads its config from. 
+
+
+Post svn config the subversion.conf file looks like this:
+LoadModule dav_svn_module     modules/mod_dav_svn.so
+LoadModule authz_svn_module   modules/mod_authz_svn.so
+
+<Location /svn>
+   DAV svn
+   SVNParentPath /var/www/svn
+   AuthType Basic
+   AuthName "Authorization Realm"
+   AuthUserFile /etc/svn-users
+   Require valid-user
+</Location>
+
