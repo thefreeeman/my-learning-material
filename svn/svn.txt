@@ -1,0 +1,24 @@
+Trunk: The trunk is a directory where all the main development happens and is usually checked out by developers to work on the project.
+
+Tags: The tags directory is used to store named snapshots of the project. Tag operation allows to give descriptive and memorable names to specific version in the repository.
+
+For example LAST_STABLE_CODE_BEFORE_EMAIL_SUPPORT is more memorable than
+
+Repository UUID: 7ceef8cb-3799-40dd-a067-c216ec2e5247 and
+
+Revision: 13
+
+
+Installing SVN on Debian based GNU/Linux:
+svn --version
+sudo apt-get update
+sudo apt-get install subversion
+svn --version
+
+Installing SVN on RPM based GNU/Linux: 
+su - 
+<enter passsword>
+yum install subversion
+svn --version
+
+
