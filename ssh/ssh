@@ -1,0 +1,19 @@
+commands to find out the keys:
+------------------------------
+
+cd ~/.ssh
+ls -al
+
+this should give a list of three files:
+id_rsa
+id_rsa.pub
+known_hosts
+
+
+how to create a new ssh key:
+---------------------------
+ssh-keygen -t rsa -C "tapask09@gmail.com"
+xclip sel clip < ~/.ssh/id_rsa.pub
+paste the key to github settings under key
+git -a ~/.ssh/id_rsa.pub
+git -T git@github.com --> this is to test the public key
