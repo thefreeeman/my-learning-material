@@ -401,6 +401,24 @@ echo day | sed s/day/night/ --> echoes night
 echo Sunday | sed 's/day/night/' --> echoes Sunnight and not Sunday
 sed 's/one/ONE/' <file		--> replaces one with ONE on each line in the file 
 
+??? sed command to select the part of the string after branches/ or tags/ from th strings like branches/MIBWW or tags/MIB_UAT_1?
+--> export sometag="branches/MIBWW"; echo $sometag | sed 's/\(branches\)\/\(.*\)/\2/'
+
+??? considering there can be two values for a variable i.e., sometag="/branches/MIBWW" or could be sometag="/tags/MIB_UAT_1". How to find out the part of th string post /tags/ or post /branches/ ?
+--> use multiple sed commands in the same line as folllows:
+	
+echo $sometag | sed -e 's/\(.*tags\)\/\(.*\)/\2/' -e 's/\(.*branches\)\/\(.*\)/\2/'
+MIB_UAT_1
+echo $sometag | sed -e 's/\(\/tags\)\/\(.*\)/\2/' -e 's/\(\/branches\)\/\(.*\)/\2/'
+MIB_UAT_1
+
+the first one takes into considertation that there can /cannot be a / before the tags or branches
+the second one considers that the selection woudl always be /tags/ or /branches
+
+
+
+
+
 Substiture command in detail:
 ------------------------------
 ...sed s/one/two  ....
