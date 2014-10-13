@@ -1,0 +1,8 @@
+??? copy text from command to clipboard
+--> sudo apt-get install xclip; cat somefile | xclip; ##for copying the text
+--> xclip -o ###for pasting the text
+
+
+??? copy text from terminal to an external program like a text editor or browser
+--> echo somefile | xclip -selection clipboard
+    
