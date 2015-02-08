@@ -23,3 +23,8 @@ $ ls -l */ 	--> lists only files contained in the directories present in the pwd
 $ ls -lR */	--> this does NOT shows required output in recursive manner. not the right answer for recursivedirectory lissting only. 
 
 
+5) how to check the RAM available in your system? 
+$ cat /proc/meminfo
+$ top
+$ free -m 
+$ htop 
