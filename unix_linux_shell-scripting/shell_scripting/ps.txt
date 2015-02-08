@@ -1,5 +1,0 @@
-$ ps -ef SHELL
-     UID     PID    PPID  TTY        STIME COMMAND
-   tapas    3844    3536 pty0     16:39:39 /usr/bin/bash
-   tapas    7468    3844 pty0     17:21:01 /usr/bin/ps
-   tapas    3536       1 ?        16:39:38 /usr/bin/mintty

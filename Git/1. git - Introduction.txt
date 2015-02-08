@@ -28,11 +28,11 @@ snapshots not differences:
 	Git stores data as snapshots of the project over time:
 		  - Git thinks of its data more like a set of snapshots of a mini filesystem. 
 		  - Every time you commit, or save the state of your project in Git, it basically takes a picture of what all your files look like at that moment and stores a reference to that snapshot.
-		  - To be efficient, if files have not changed, Git doesn’t store the file again—just a link to the previous identical file it has already stored. 
+		  - To be efficient, if files have not changed, Git doesn't store the file again, just a link to the previous identical file it has already stored. 
 		  - This makes Git more like a mini filesystem with some incredibly powerful tools built on top of it, rather than simply a VCS. 
 
 	Git has Integrity
-		- Everything in Git is check-summed before it is stored and is then referred to by that checksum.  This means it’s impossible to change the contents of any file or directory without Git knowing about it.
+		- Everything in Git is check-summed before it is stored and is then referred to by that checksum.  This means it's impossible to change the contents of any file or directory without Git knowing about it.
 		-  You can’t lose information in transit or get file corruption without Git being able to detect it.
 		- SHA-1 hash. This is a 40-character string composed of hexadecimal characters (0–9 and a–f) and calculated based on the contents of a file or directory structure in Git. A SHA-1 hash looks something like this:
 		24b9da6552252987aa493b52f8696cd6d3b00373
@@ -41,22 +41,22 @@ snapshots not differences:
 The Three States
 -----------------
 	Git has three main states that your files can reside in: 
-	 - committed	:data is safely stored in your local database. 								(file version in the git directory)
-	 - modified		:you have changed the file but have not committed it to your database yet. 	(checkedout but not staged)
+	 - committed		:data is safely stored in your local database. (file version in the git directory)
+	 - modified		:you have changed the file but have not committed it to your database yet. (checked-out but not staged)
 	 - staged		:you have marked a modified file in its current version to go into your next commit snapshot.	(modified and added to the staging area)
 	 
 	 
-	 working directory			staging area			git directory(repository)
+		 working directory					staging area				git directory(repository)
 	 		|							|						 |
 	 		|							|						 |
-			|				checkout the project				 |
-			|<---------<----------------|--------------<---------|
+			|				checkout the project	|						 |
+			|<---------<----------------|--------------<------------|						 |
 			|							|						 |
 			|							|						 |
 			|							|						 |
-			|--stage the files--------->|						 |
+			|------------------------------stage the files--------->|						 |
 			|							|						 |
-			|							|------commit-->-------->|
+			|							|------------------------------commit-->-------->|
 			|							|						 |
 			|							|						 |
 	 
@@ -168,3 +168,8 @@ On windows:
 C:\Users\444756>git help config
 Launching default browser to display HTML ...
 
+
+
+Queries:
+what is hierarchical model in terms of Software Version Control? 
+what is SHA-1 hash? 

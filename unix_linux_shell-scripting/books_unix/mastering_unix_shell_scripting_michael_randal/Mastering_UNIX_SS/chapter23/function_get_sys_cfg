@@ -1,7 +1,0 @@
-get_sys_cfg ()
-{
-# Short listing of the system configuration
-
-lscfg
-}
-

@@ -1,7 +1,0 @@
-get_long_sys_config ()
-{
-# Long detailed listing of the system configuration
-
-lscfg -vp
-}
-
