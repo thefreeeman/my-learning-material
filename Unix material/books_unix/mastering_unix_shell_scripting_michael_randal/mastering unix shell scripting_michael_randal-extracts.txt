@@ -1,0 +1,56 @@
+unix is case sensitive
+shells are located in the /usr/bin or /bin directory based on the flavour (type $(uname) to know which unix flavour you are using. command usage same as hostname or echo $(hosrname). 
+
+
+Interpreted and not compiled
+-----------------------------
+shell scripts and functions are interpreted and not compiled. Both shell commands and functions are ASCII text that are read by shell command interpreter. So when we execute a shell script, or function, a command interpreter goes through the ASCII text line-by-line, loop-by-loop, test-by-test, and executes each statement as each line is reached from the top to the bottom. 
+
+COmpiler versus Interpreter
+----------------------------
+http://web.archive.org/web/20090414123001/http://ugweb.cs.ualberta.ca/resources/java/faq/compile.html
+
+
+I highly recommend akapelko's link above. The comparison w/ translating between a French and English speaker is the simplest explanation of the difference I have found: Interpreters are present (during the conversation/execution) to translate line-by-line as you speak... it's more convenient and flexible and quicker to begin, but takes more time for a given piece of content. Compilation, meanwhile, is like translating a written document that the other person can read in their own free time. It's much less flexible, but they can read it at their native language speed
+
+
+
+What We can execute in a shell script
+-------------------------------------
+most any command in a shell script that we can execute from the command line. (One
+exception is trying to set an execution suid or sgid, sticky bit, within a shell script; it is
+not supported for security reasons.)
+
+
+to remove the special function of a special character it must be immediately preceded with a
+backslash, \, or enclosed within ’ ’forward tic marks (single quotes).
+
+shells are usually available in the /usr/bin or /bin directory:
+egs for Bourne Again, Korn and Bourne Shells 
+
+/usr/bin/Bash
+/usr/bin/ksh
+/usr/bin/sh
+
+or
+
+/bin/Bash
+/bin/ksh
+/bin/sh
+
+command and shortcuts :
+------------------------
+$uname or echo $(uname) --> unix flavour
+in a shell script, you can use set -x for debugging. 
+set -n for syntax check but needs to be commented before execution
+
+
+???
+vi editor:
+how to go to the first line of a vi editor
+how to go directlyy to the first and last character of a file
+how to directly go to a specific line in a file. 
+
+do we really need to have .sh extension for the shelll scripts
+
+how to create a user in unix, login with multiple users and then execute the last command

@@ -1,0 +1,11 @@
+grep command usage:
+==================
+get the shell name:
+$ env | grep SHELL
+SHELL=/bin/bash
+
+tapas@tapas-PC ~
+$ ps -ef | grep $SHELL
+   tapas    3844    3536 pty0     16:39:39 /usr/bin/bash
+   tapas    3144    3844 pty0     17:21:19 /usr/bin/bash
+
