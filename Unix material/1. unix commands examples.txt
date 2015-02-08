@@ -1,0 +1,115 @@
+---> some useful information on commands:
+	ls / 			--> lists contents of the root directory
+	ls . 			--> lists contents of the current directory
+	ls | more 		--> for listing the contents of a directory one screen at a time. 
+	ls | sort 		--> for listing the files in the sorted manner. 
+	ls | spell | sort 	--> for listing the files by first spell checking and then displaying in sorted manner;does not work on cygwin and on bash perhaps. 
+	ls | wc -l >> directoryinfo 	--> for appending the count of the items in the directory to the directoryinfo file. 
+	ls | grep patterninfo	--> lists the contents of the directory that matches the patteninfo.
+	ls patterninfo		--> lists the contents of the directory named / matching pattern name patterninfo (patterninfo is contained in the current directory)
+	ls -lR			--> displays the directory contents recursively
+	ls -lR directoryinfo	--> displays recursively the contents of the directoryinfo (note that's an R and not an r)
+	ls -A			--> shows almost all entries i.e., all entries except . and .. 
+	ls -I<pattern>		--> shows entries that are invert selection to the <pattern> passed
+	ls -t			--> shows entries in latest first pattern
+	ls -d			--> lists directory entries only and not contents. see example below. 
+	more filenametoread	--> displays the contents of the file filenametoread. 
+	less filenametoread	--> same as more but with more options; commands are  based on more and vi. Does not have to read the entire file before starting and hence faster than more than text editors like vi, to be explored more
+
+
+'ls' examples:
+---------------
+	ls -lRt:
+		shows detailed entry (-l), recursively(-R) for all directories, in latest-first(-t) format
+	ls -lA:
+		shows detailed entries(-l), almost all entries except for all dirs except . and ..(-A)
+	ls -lRA: 
+		same as above + shows recursively(-R) for all directories
+	ls -AI'*":
+		shows almost for all files (-A) except for . and .. entries and for all except (-I) * i.e., shows only hidden files
+	ls -ltrAI'*':
+		shows detailed entries(-l), in reverse(-r and not -R) of latest first(-t) order with almost all entries except for . and .. (-A) 		and invert selection (-I) of * ==> shows hidden files in latest last order. -R switch wont work here since . is not being shown. 
+	ls -ld:
+		shows only the detailed info of the current dir i.e., entry for '.' only. 
+	ls -ld <somedir>:
+		shows the detailed infoof the <somedir> and not the contents of the <somedir>  
+
+	ls -d .?*: 
+		shows only hidden files but .. is also included
+	ls -d .!(|.)
+		shows only hidden files		
+
+
+
+
+
+tar: 
+	tar -zxvf filename	--> -z switch here is for handling gzip/gunzip files
+
+unzip: 
+	unzip -Z filename	--> when first option is -Z, then remaining options are taken to be zipinfo options. 
+
+	cd ~ 			--> takes you to the home directory (and not the root directory). ~ usually is /home/users/y/yourid/ or something like this. 
+
+passwd:
+	passwd 			--> command to change the password for the current user
+	yppasswd 		--> command tochange current user password in some unix-like environments
+	
+man:
+	man commandtoman	--> displays manual pages for the commandtoman
+	man -k commandtoman	--> displays manual pages for the commandtoman, but int the CodeListing format; quite useful command
+	apropos commandtoman	--> same as man -k command; more info can be found by "man -k apropos", quite simple,huh!
+	man 1 commandtoman or man -s 1 commandtoman	--> displays the section 1 of the manual pages forthe command commandtoman
+	man last commandtoman	--> displays the last section of the manualpages for the commandtoman
+	man passwd | col -b -x > ~/my.password.command.notes --> to make a copy of the passwd man page, sans formatting, in your home 	directory, under the name my.password.command.notes
+	The col -b -x command fixes some formatting oddities; without it, all of the underlined words might show up as _u_n_d_e_r_l_i_n_e, depending on the system.)
+	
+
+mkdir:
+	mkdir -p ~/learning/Unix-N-Shell-scripting/Unix-Commands
+	the above will create the specified directorties recursively
+
+	
+
+
+
+---> To exclude the last word of all the line like sync.php, uploads.php, backup.php
+
+File text include as below
+
+/usr/home/htdocs/drag-and-drop/htdocs.php
+/usr/home//htdocs/sms/publish/pages/sync.php
+/usr/home/htdocs/track/backup.php
+/usr/home/htdocs/smstest/smstest.php
+/usr/home/htdocs/uploads.php
+/usr/home/htdocs/017/backup.php
+
+
+
+solution:
+rev filecontenet.txt | cut -d’/’ -f2- | rev
+
+rev filecontenet.txt –> reverses the file and pipes to cut command.
+cut -d’/’ -f2- –> cuts off the first field ( cuts off last field, as it is reversed ).
+rev –> prints the output given order.
+
+sed -e ‘s/\/[^/]*.php$/\//’ filecontenet.txt
+
+
+
+
+---> To search for a string in all the files in the directory and add a $ symbol at the start of the searched line and save in the same file.
+
+Solution:
+sed -i ‘s/.*abc.*/$&/’ *
+
+-i : edit the input file.
+s/// : substitute the matched pattern with the replacement string.
+/.*abc.*/ : match the string abc
+/$&/ : Replace with $ followed by matched string.
+* : all the files in the current directory.
+
+
+or
+find . -type f -exec sed -i ‘s/.*abc.*/#&/’ {} \;
+for applying it recursively on all files

@@ -1,0 +1,25 @@
+1) How to echo current dir contents without using ls?
+$ echo .*	--> lists all dir contents (hidden + not hidden)
+$ echo .[^.]*	--> lists only hidden files/dirs
+$ echo *	--> lists only un-hidden files/directories
+
+2) how to show directory listing only and not dir contents? 
+$ ls -ld
+or
+$ ls -ld .
+for parent dir
+$ ls -ld ..
+for some other specific dir:
+$ ls -ld <somedir>
+
+3) How to list only hidden files? 
+$ ls -lAI'*'
+$ ls -ld .??* --> this doesnot show files such as .a, .1 etc...so not completely fail proof
+$ echo .[^.]*
+
+4) How to list only directorie? 
+$ ls -ld */	--> lists only dirs present in the current directory
+$ ls -l */ 	--> lists only files contained in the directories present in the pwd
+$ ls -lR */	--> this does NOT shows required output in recursive manner. not the right answer for recursivedirectory lissting only. 
+
+

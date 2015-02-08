@@ -1,3 +1,11 @@
+*ux command to find specific hidden files on filesystem (recursively starting from current directory)
+---------------------------------------------------------------------------------------------------
+usecase: 	to find .gitignore files present in my repository
+find .		--> lists down all hidden files on the filesyste
+ls -lAI'*'	--> lists down all hidden files in the currrent dir
+ls -ld .??*	--> lists down all hidden files in current dir but fails for files such as .a, .1 etc
+so whats the command? 
+
 Understanding Unix Shell scripts (Accenture mylearning training - skillport)
 -----------------------------------------------------------------------------
 Unix shell is a command-line interpreter that processes each command or combination of commands on a command line when 

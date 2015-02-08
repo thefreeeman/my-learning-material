@@ -43,3 +43,8 @@ A: status show the following:
 
    diff shows exactly what chages have been made in which files
 
+
+Q: How to delete a stashed file from a Gitrepo and keep it in the repo (in untracked mode)? 
+A: $ git rm --cached <filename>		--> removes the file from stash and keeps it in untracked mode
+   $ git rm -f <filename> 		--> removes the stashed file permanently. Does not store it locally as untracked file
+

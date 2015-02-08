@@ -89,21 +89,47 @@ checkout a repo --> [ unmodified ] --> make changes --> [modified] --> stage the
 Very Useful + Important Reading:
 http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository
 
-commands:
+GIT COMMANDS:
+--------------
 $ git status
-$ git add
+
+
+Staging, unstaging and un-doing changes:
+------------------------------------------
+$ git add <file>					--> for staging the <file>
+$ git reset HEAD <file>					--> for unstaging the <file>
+****************DO NOT USE THIS COMMAND:
+$ git reset --hard					--> the file in your working dir is not touched. 
+************************************************
+$ git checkout -- <file> 				--> for unmodifying a modified file. The file then looks like when you last committed. 
+$ git commit --amend					--> takes your staging area & uses it for commit. 
+Usecase: when you've forgotten to add a few changes in a commit. this takes the staged changes and 'amend' the previous commit to include the staged changes.
+
+Usecase: When you want to change your last commit's commit message. In this case (when only commit msg is to be changed) there should be no staged changes post the last commit. 
+
+
+Committing the staged changes
+------------------------------
 $ git commit -v
 $ git commit -m "some commit message here"
 $ git commit -a -m "some commit message here"		
 --> -a switch tell git to automatically stage all files that have been modified / deleted. New files that you've not told git about are not affected.  
 
-$ git status						--> 
-shows un-staged(or modified only), staged (or modified and staged but not-committed) changes, untracked files etc
+
+$ git status
+or
+$ git status --short
+--> shows un-staged(or modified only), staged (or modified and staged but not-committed) changes, untracked files etc
+
 
 $ git diff						--> shows exact changes ( 'unstaged' only)
 $ git diff--cached
 or
 $ git diff --staged (for versions 6.1 and later)	--> shows exact changes ('staged' only)
+
+
+$ git 
+
 
 http://git-scm.com/book/en/Git-Basics-Viewing-the-Commit-History
 $ git log
