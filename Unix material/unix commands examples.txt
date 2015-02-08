@@ -11,11 +11,15 @@
 	ls -lR directoryinfo	--> displays recursively the contents of the directoryinfo (note that's an R and not an r)
 
 	more filenametoread	--> displays the contents of the file filenametoread. 
-	less filenametoread	--> same as more but with more options; yet to be explored
+	less filenametoread	--> same as more but with more options; commands are  based on more and vi. Does not have to read the entire file before starting and hence faster than more than text editors like vi, to be explored more
 
 
 
+tar: 
+	tar -zxvf filename	--> -z switch here is for handling gzip/gunzip files
 
+unzip: 
+	unzip -Z filename	--> when first option is -Z, then remaining options are taken to be zipinfo options. 
 
 	cd ~ 			--> takes you to the home directory (and not the root directory). ~ usually is /home/users/y/yourid/ or something like this. 
 

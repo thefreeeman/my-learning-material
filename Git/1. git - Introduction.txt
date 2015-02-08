@@ -135,6 +135,7 @@ Your Settings:
 --------------
 git config --list
 git config {key}
+git config --global --get user.name		--> for fetching value for user.name attribute from global settings (~/.gitconfig file)
 
 
 C:\Users\444756>git config --list
@@ -173,3 +174,5 @@ Launching default browser to display HTML ...
 Queries:
 what is hierarchical model in terms of Software Version Control? 
 what is SHA-1 hash? 
+make prefix
+sudo make prefix

@@ -1,5 +1,11 @@
 G I T -- B A S I C S 
 - - - - - - - - - - -
+Getting git help
+man git <verb> or man git-<verb>
+git help <verb> or git <verb> --help
+for example:
+man git config
+
 
 You can get a Git project using two main approaches:
 1. Take an existing project or directory and imports it into Git.
@@ -38,6 +44,16 @@ Different protocols for cloning a git repo:
 	- git://
 	- http(s)://
 	- user@server:/path.git (uses the SSH transfer protocol)
+Example of URLS based on the above protocols:
+HTTPS:	
+	https://github.com/thefreeeman/my-learning-material.git
+SSH:
+	git@github.com:thefreeeman/my-learning-material.git
+SVN Checkput URL:
+	https://github.com/thefreeeman/my-learning-material
+
+
+
 
 Recording changes to the repository
 -----------------------------------
@@ -51,23 +67,24 @@ Untracked files:
 		Everything else — any files in your working directory that were not in your last snapshot and are not in your staging area. 
 
 		
-	|Untracked|				|Unmodified|			|modified|				 |Staged|
-		-------------------------------------------------------------------------
-		|						|						|						|
-		|						|						|						|
-		|						|----edit the file----->|						|
-		|----add the file------>|						|						|
-		|						|						|						|
-		|						|						|---stage the file----->|
-		|<----remove the file---|						|						|
-		|						|						|						|
-		|						|						|						|
-		|						|						|						|
-		|						|<-------------commit the file------------------|
-		|						|						|						|
-		|						|						|						|
-		-------------------------------------------------------------------------
+		|Untracked|				|Unmodified|			|modified|	    |Staged|
+		--------------------------------------------------------------------------------------------------------
+		|						|				|			|
+		|----Add the file------------------------------------------------------------------------------------->	|
+		|						|-----edit the file------------>|			|
+		|						|				|----->stage----------->|
+		|						|				|			|						|
+		|<----------------remove the file---------------|				|			|
+		|						|<--------------------commit the file------------------	|
+		|						|				|			|
+		---------------------------------------------------------------------------------------------------------
 					The lifecycle of the status of your files.
+
+[untracked] ----> add the file --> [staged]
+checkout a repo --> [ unmodified ] --> make changes --> [modified] --> stage the changes --> [staged]--->commit file --> [unmodified]
+[unmodified] --> remove the file ----> [untracked]
+
+
 					
 Very Useful + Important Reading:
 http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository
@@ -77,10 +94,16 @@ $ git status
 $ git add
 $ git commit -v
 $ git commit -m "some commit message here"
-$ git commit -a -m "some commit message here"
-$ git status
-$ git diff	--> to know exactly what has changed and not just the files that have changed
-$ git diff--cached  or git diff --staged (for versions 6.1 and later)
+$ git commit -a -m "some commit message here"		
+--> -a switch tell git to automatically stage all files that have been modified / deleted. New files that you've not told git about are not affected.  
+
+$ git status						--> 
+shows un-staged(or modified only), staged (or modified and staged but not-committed) changes, untracked files etc
+
+$ git diff						--> shows exact changes ( 'unstaged' only)
+$ git diff--cached
+or
+$ git diff --staged (for versions 6.1 and later)	--> shows exact changes ('staged' only)
 
 http://git-scm.com/book/en/Git-Basics-Viewing-the-Commit-History
 $ git log
@@ -179,3 +202,6 @@ examples:
 	$ git config --global alias.unstage 'reset HEAD' --> used as $ git unstage fileA
 	$ git config --global alias.co checkout		--> $ git co
 	$ git config --global alias.br branch		--> $ git br
+
+
+this is an unstaged change...let's see if this gets reflected
